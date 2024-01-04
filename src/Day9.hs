@@ -30,16 +30,20 @@ type GameState s = (Score s, Chain' s)
 
 run :: Int -> Int -> Int -> Int -> Int -> GameState s -> ST s ()
 run limit players currentMarble currentPlayer currentPos g@(score, vec)
+  -- | traceShow (currentPlayer, currentMarble, currentPos) False = undefined
   | currentMarble > limit = return ()
   | currentMarble `mod` 23 == 0 = do
       removed <- backward 7 currentPos vec
       next <- deleteChain removed vec
-      M.modify vec ()
-      undefined
+      M.modify score (+ (removed + currentMarble)) currentPlayer
+      run limit players nextMarble nextPlayer next (score, vec)
   | otherwise = do
       next <- snd <$> M.read vec currentPos
       insertChain currentMarble next vec
-      run limit players (currentMarble + 1) ((currentPlayer + 1) `mod` players) currentMarble (score, vec)
+      run limit players nextMarble nextPlayer currentMarble (score, vec)
+  where
+    nextPlayer = (currentPlayer + 1) `mod` players
+    nextMarble = currentMarble + 1
 
 forward, backward :: Int -> Int -> Chain' s -> ST s Int
 forward n pos c
@@ -99,4 +103,5 @@ day9 :: IO ()
 day9 = do
   -- print $ maximum $ map sum $ transpose $ chunksOf player $ unfoldr (next marble) (1, (0, S.singleton 0))
   -- print $ maximum $ map sum $ transpose $ chunksOf player $ unfoldr (next (100 * marble)) (1, (0, S.singleton 0))
-  print $ reconstruct $ snd $ run' 22 20
+  print $ U.maximum $ fst $ run' marble player
+  print $ U.maximum $ fst $ run' (marble * 100) player
