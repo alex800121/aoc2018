@@ -97,4 +97,3 @@ day13 = do
   let ans = run m cart
   print $ last $ fst ans
   print $ _index $ head $ snd ans
-  print ans
