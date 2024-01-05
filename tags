@@ -16,7 +16,7 @@ Day10	/home/alex800121/haskell/aoc/2018/src/Day10.hs	2;"	m
 Day11	/home/alex800121/haskell/aoc/2018/src/Day11.hs	1;"	m
 Day12	/home/alex800121/haskell/aoc/2018/src/Day12.hs	1;"	m
 Day13	/home/alex800121/haskell/aoc/2018/src/Day13.hs	3;"	m
-Day14	/home/alex800121/haskell/aoc/2018/src/Day14.hs	1;"	m
+Day14	/home/alex800121/haskell/aoc/2018/src/Day14.hs	2;"	m
 Day15	/home/alex800121/haskell/aoc/2018/src/Day15.hs	1;"	m
 Day16	/home/alex800121/haskell/aoc/2018/src/Day16.hs	1;"	m
 Day17	/home/alex800121/haskell/aoc/2018/src/Day17.hs	1;"	m
@@ -104,7 +104,6 @@ bindir	/home/alex800121/haskell/aoc/2018/dist-newstyle/build/x86_64-linux/ghc-9.
 bindir	/home/alex800121/haskell/aoc/2018/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	48;"	f
 buildGen	/home/alex800121/haskell/aoc/2018/src/Day12.hs	14;"	f
 buildTimeTable	/home/alex800121/haskell/aoc/2018/src/Day4.hs	25;"	f
-buildVector	/home/alex800121/haskell/aoc/2018/src/Day14.hs	12;"	f
 calc	/home/alex800121/haskell/aoc/2018/src/Day6.hs	42;"	f
 calcArea	/home/alex800121/haskell/aoc/2018/src/Day3.hs	41;"	f
 calcArea'	/home/alex800121/haskell/aoc/2018/src/Day3.hs	44;"	f
@@ -125,7 +124,7 @@ day10	/home/alex800121/haskell/aoc/2018/src/Day10.hs	57;"	f
 day11	/home/alex800121/haskell/aoc/2018/src/Day11.hs	52;"	f
 day12	/home/alex800121/haskell/aoc/2018/src/Day12.hs	36;"	f
 day13	/home/alex800121/haskell/aoc/2018/src/Day13.hs	93;"	f
-day14	/home/alex800121/haskell/aoc/2018/src/Day14.hs	15;"	f
+day14	/home/alex800121/haskell/aoc/2018/src/Day14.hs	28;"	f
 day15	/home/alex800121/haskell/aoc/2018/src/Day15.hs	3;"	f
 day16	/home/alex800121/haskell/aoc/2018/src/Day16.hs	3;"	f
 day17	/home/alex800121/haskell/aoc/2018/src/Day17.hs	3;"	f
@@ -168,6 +167,7 @@ firstRepeatBy	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	126;"	f
 focus	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	150;"	f
 forward	/home/alex800121/haskell/aoc/2018/src/Day9.hs	48;"	f
 fromVec	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	397;"	f
+genList	/home/alex800121/haskell/aoc/2018/src/Day14.hs	16;"	f
 getBinDir	/home/alex800121/haskell/aoc/2018/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	43;"	f
 getBinDir	/home/alex800121/haskell/aoc/2018/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	43;"	f
 getDataDir	/home/alex800121/haskell/aoc/2018/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	43;"	f
@@ -187,7 +187,6 @@ homepage	/home/alex800121/haskell/aoc/2018/dist-newstyle/build/x86_64-linux/ghc-
 homepage	/home/alex800121/haskell/aoc/2018/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/PackageInfo_AOC2020.hs	24;"	f
 initArray	/home/alex800121/haskell/aoc/2018/src/Day11.hs	16;"	f
 input	/home/alex800121/haskell/aoc/2018/src/Day11.hs	10;"	f
-input	/home/alex800121/haskell/aoc/2018/src/Day14.hs	8;"	f
 inputParser	/home/alex800121/haskell/aoc/2018/src/Day3.hs	12;"	f
 insertChain	/home/alex800121/haskell/aoc/2018/src/Day9.hs	59;"	f
 intToBits	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	201;"	f
@@ -245,7 +244,9 @@ synopsis	/home/alex800121/haskell/aoc/2018/dist-newstyle/build/x86_64-linux/ghc-
 synopsis	/home/alex800121/haskell/aoc/2018/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/PackageInfo_AOC2020.hs	20;"	f
 sysconfdir	/home/alex800121/haskell/aoc/2018/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	48;"	f
 sysconfdir	/home/alex800121/haskell/aoc/2018/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	48;"	f
-test	/home/alex800121/haskell/aoc/2018/src/Day14.hs	10;"	f
+test	/home/alex800121/haskell/aoc/2018/src/Day14.hs	9;"	f
+testInt	/home/alex800121/haskell/aoc/2018/src/Day14.hs	12;"	f
+testIntList	/home/alex800121/haskell/aoc/2018/src/Day14.hs	14;"	f
 third	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	147;"	f
 tick	/home/alex800121/haskell/aoc/2018/src/Day13.hs	43;"	f
 toBits	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	191;"	f
