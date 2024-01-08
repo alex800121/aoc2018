@@ -6,6 +6,7 @@ module Day15 where
 
 import Control.Lens (over, set, view)
 import Control.Lens.TH
+import Control.Lens.Indexed
 import Data.Array
 import Data.Bifunctor (Bifunctor (..))
 import Data.Coerce
@@ -16,7 +17,7 @@ import Data.Maybe (mapMaybe)
 import Data.Set (Set)
 import qualified Data.Set as Set
 import Data.Tuple (swap)
-import MyLib (drawArray)
+import MyLib (drawArray, drawGraph)
 import Prelude hiding (round)
 
 data Unit = Unit
@@ -43,14 +44,21 @@ instance Enum Species where
 
 data GameState = G
   { _units :: Set Unit,
-    _gameMap :: Array RIndex Space
+    _gameMap :: Array RIndex Space,
+    _hasEG :: Array Int Int
   }
   deriving (Eq, Ord)
 
 showGameState :: GameState -> String
-showGameState (G u g) = undefined
+showGameState (G u g _) = unlines (drawGraph f g'') ++ u'
   where
-    uPos = Map.fromList $ Set.toList $ Set.map ((,) <$> _pos <*> show . _species) u
+    uPos = Map.fromList $ Set.toList $ Set.map ((,) <$> fromIndex . _pos <*> show . _species) u
+    g' = Map.fromList . map (bimap fromIndex show) $ assocs g
+    g'' = Map.union uPos g'
+    f Nothing = ' '
+    f (Just x) = head x
+    u' = unlines $ map show $ Set.toList u
+
 
 instance Show GameState where
   show = showGameState
@@ -82,7 +90,7 @@ makeLenses ''GameState
 adjacent = [(0, 1), (0, -1), (1, 0), (-1, 0)]
 
 readInput :: Int -> Int -> Array Index Char -> GameState
-readInput hp ap input = G units s
+readInput hp ap input = G units s (listArray (0, 1) [elves, goblins])
   where
     unit x i = Unit False i hp ap x
     b = bimap R R (bounds input)
@@ -90,6 +98,8 @@ readInput hp ap input = G units s
     f = Set.fromList . map (\x -> unit (if snd x == 'E' then Elf else Goblin) (fst x))
     units = f $ filter ((`elem` "EG") . snd) l
     s = array b (map (second (\case '#' -> Wall; _ -> Space)) l)
+    elves = length (Set.filter ((== Elf) . _species) units)
+    goblins = length (Set.filter ((== Goblin) . _species) units)
 
 round :: GameState -> GameState
 round g
@@ -105,7 +115,7 @@ turn g u = g'
     u' = move g u
     g' = attack g u'
 
-notWall g i = inRange b i && (gm ! i /= Wall)
+hasSpace g i = inRange b i && gm ! i /= Wall
   where
     gm = _gameMap g
     b = bounds gm
@@ -122,7 +132,7 @@ move g u
   | otherwise = set moved True $ set pos i' u
   where
     start =
-      Map.filterWithKey (\k _ -> notWall g k) $
+      Map.filterWithKey (\k _ -> hasSpace g k && not (hasTeam g u k)) $
         Map.fromList [(x, x) | let i = _pos u, (a, b) <- adjacent, let x = bimap (+ a) (+ b) i]
     i' = bfs start Set.empty
     bfs next visited
@@ -137,18 +147,19 @@ move g u
         i' = Map.findMin nextToU
         visited' = Set.union visited $ Map.keysSet next
         next'' =
-          Map.filterWithKey (\k _ -> not (hasTeam g u k) && notWall g k && Set.notMember k visited')
+          Map.filterWithKey (\k _ -> not (hasTeam g u k) && hasSpace g k && Set.notMember k visited')
             . Map.unionsWith min
             $ map (\(a, b) -> Map.mapKeys (bimap (+ a) (+ b)) next') adjacent
 
 attack :: GameState -> Unit -> GameState
 attack g u
   | null ops = over units (Set.insert u) g
-  | otherwise = over units (Set.insert u . (if hp' <= 0 then id else Set.insert op') . Set.delete op) g
+  | hp' <= 0 = over units (Set.insert u . Set.delete op) g
+  | otherwise = over units (Set.insert u . Set.insert op' . Set.delete op) g
   where
     i = map (\(a, b) -> bimap (+ a) (+ b) (_pos u)) adjacent
-    ops = Set.filter ((`elem` i) . _pos) $ _units g
-    op = minimumBy (compare `on` _hp) ops
+    ops = Set.filter ((&&) <$> (`elem` i) . _pos <*> (/= _species u) . _species) $ _units g
+    op = minimumBy ((compare `on` _hp) <> (compare `on` _pos)) ops
     op' = over hp (subtract (_ap u)) op
     hp' = _hp op'
 
@@ -157,4 +168,5 @@ day15 = do
   input <- drawArray @Array . lines <$> readFile "input/input15.txt"
   input <- drawArray @Array . lines <$> readFile "input/test15.txt"
   let g = readInput 200 3 input
-  print $ round g
+  print $ (!! 23) $ iterate round g
+  print $ (!! 47) $ iterate round g
