@@ -1,19 +1,22 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE TupleSections #-}
 
 module Day15 where
 
 import Control.Lens (over, set, view)
-import Control.Lens.TH
+import Control.Lens.At (Ixed (..))
 import Control.Lens.Indexed
+import Control.Lens.TH
 import Data.Array
 import Data.Bifunctor (Bifunctor (..))
 import Data.Coerce
 import Data.Foldable (minimumBy)
 import Data.Function (on)
+import Data.List (find, findIndex)
 import qualified Data.Map.Strict as Map
-import Data.Maybe (mapMaybe)
+import Data.Maybe (fromJust, mapMaybe)
 import Data.Set (Set)
 import qualified Data.Set as Set
 import Data.Tuple (swap)
@@ -45,12 +48,13 @@ instance Enum Species where
 data GameState = G
   { _units :: Set Unit,
     _gameMap :: Array RIndex Space,
-    _hasEG :: Array Int Int
+    _egNum :: Array Int Int,
+    _roundN :: Int
   }
   deriving (Eq, Ord)
 
 showGameState :: GameState -> String
-showGameState (G u g _) = unlines (drawGraph f g'') ++ u'
+showGameState (G u g _ i) = unlines (drawGraph f g'') ++ u' ++ "\nRound: " ++ show i
   where
     uPos = Map.fromList $ Set.toList $ Set.map ((,) <$> fromIndex . _pos <*> show . _species) u
     g' = Map.fromList . map (bimap fromIndex show) $ assocs g
@@ -58,7 +62,6 @@ showGameState (G u g _) = unlines (drawGraph f g'') ++ u'
     f Nothing = ' '
     f (Just x) = head x
     u' = unlines $ map show $ Set.toList u
-
 
 instance Show GameState where
   show = showGameState
@@ -89,10 +92,10 @@ makeLenses ''GameState
 
 adjacent = [(0, 1), (0, -1), (1, 0), (-1, 0)]
 
-readInput :: Int -> Int -> Array Index Char -> GameState
-readInput hp ap input = G units s (listArray (0, 1) [elves, goblins])
+readInput :: Int -> Int -> Int -> Array Index Char -> GameState
+readInput hp gobAp elfAp input = G units s (listArray (0, 1) [elves, goblins]) 0
   where
-    unit x i = Unit False i hp ap x
+    unit x i = let ap = if x == Elf then elfAp else gobAp in Unit False i hp ap x
     b = bimap R R (bounds input)
     l = map (first R) $ assocs input
     f = Set.fromList . map (\x -> unit (if snd x == 'E' then Elf else Goblin) (fst x))
@@ -103,11 +106,14 @@ readInput hp ap input = G units s (listArray (0, 1) [elves, goblins])
 
 round :: GameState -> GameState
 round g
-  | _moved u = over units (Set.map (set moved False)) g
-  | otherwise = round (turn (set units us' g) u)
+  | _moved u = over roundN (+ 1) $ over units (Set.map (set moved False)) g
+  | 0 `elem` _egNum g' = (if _moved u' then over roundN (+ 1) else id) g'
+  | otherwise = round g'
   where
     us = _units g
     (u, us') = Set.deleteFindMin us
+    g' = turn (set units us' g) u
+    u' = Set.findMin $ _units g'
 
 turn :: GameState -> Unit -> GameState
 turn g u = g'
@@ -154,7 +160,7 @@ move g u
 attack :: GameState -> Unit -> GameState
 attack g u
   | null ops = over units (Set.insert u) g
-  | hp' <= 0 = over units (Set.insert u . Set.delete op) g
+  | hp' <= 0 = over (egNum . ix (fromEnum (_species op))) (subtract 1) $ over units (Set.insert u . Set.delete op) g
   | otherwise = over units (Set.insert u . Set.insert op' . Set.delete op) g
   where
     i = map (\(a, b) -> bimap (+ a) (+ b) (_pos u)) adjacent
@@ -163,10 +169,24 @@ attack g u
     op' = over hp (subtract (_ap u)) op
     hp' = _hp op'
 
+outcome = (*) <$> _roundN <*> sum . map _hp . Set.toList . _units
 day15 :: IO ()
 day15 = do
   input <- drawArray @Array . lines <$> readFile "input/input15.txt"
-  input <- drawArray @Array . lines <$> readFile "input/test15.txt"
-  let g = readInput 200 3 input
-  print $ (!! 23) $ iterate round g
-  print $ (!! 47) $ iterate round g
+  -- input <- drawArray @Array . lines <$> readFile "input/test15.txt"
+  let g = readInput 200 3 3 input
+      elves = length $ Set.filter ((== Elf) . _species) $ _units g
+      gs = iterate round g
+      g' = find (elem 0 . _egNum) gs
+      altG =
+        find ((== elves) . (! 0) . _egNum . snd) $
+        mapMaybe
+          ( \x ->
+              let y = find (((||) <$> (< elves) . (! 0) <*> (== 0) . (! 1)) . _egNum)
+                      . iterate round
+                      $ readInput 200 3 x input
+               in (x,) <$> y
+          )
+          [4 ..]
+  print $ fmap outcome g'
+  print $ fmap (outcome . snd) altG
