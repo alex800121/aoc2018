@@ -7,6 +7,10 @@ import MyLib
 import Text.Megaparsec.Char
 import Text.Megaparsec
 import Data.List.Split (splitOn)
+import Data.IntMap (IntMap)
+import qualified Data.IntMap as IM
+import Data.List (intersect, (\\), foldl')
+import Debug.Trace
 
 data Test = Test
   { _before :: Vector Int,
@@ -27,13 +31,13 @@ testParser = do
   char ']' >> newline
   b <- signedInteger `sepBy` char ' '
   newline
-  string "After: ["
+  string "After:  ["
   c <- signedInteger `sepBy` string ", "
   char ']'
   return $ Test (V.fromList a) (head b, V.fromList $ tail b) (V.fromList c)
 
-interpretWith :: Vector OpCode -> Int -> Vector Int -> Vector Int -> Vector Int
-interpretWith opV op = opcode (opV ! op)
+interpretWith :: Vector OpCode -> (Int, Vector Int) -> Vector Int -> Vector Int
+interpretWith opV (op, v) = opcode (opV ! op) v
 
 validOpCode :: Test -> [OpCode]
 validOpCode (Test b i a) = filter (\x -> opcode x (snd i) b == a) [minBound .. maxBound]
@@ -41,9 +45,9 @@ validOpCode (Test b i a) = filter (\x -> opcode x (snd i) b == a) [minBound .. m
 opcode :: OpCode -> Vector Int -> Vector Int -> Vector Int
 opcode op v0 v = v // [(c, result)]
   where
-    a = v ! 0
-    b = v ! 1
-    c = v ! 2
+    a = v0 ! 0
+    b = v0 ! 1
+    c = v0 ! 2
     regA = v ! a
     regB = v ! b
     result = case op of
@@ -83,8 +87,25 @@ data OpCode
   | Eqrr
   deriving (Show, Eq, Ord, Enum, Bounded)
 
+reduce :: IntMap [OpCode] -> Vector OpCode
+reduce = V.fromList . map snd . f IM.empty
+  where
+    f acc m
+      | IM.null b = IM.toList acc'
+      | otherwise = f acc' b'
+      where
+        (a, b) = IM.partition ((== 1) . length) m
+        a' = IM.map head a
+        e = IM.elems a'
+        b' = IM.map (\\ e) b
+        acc' = IM.union acc a'
+
 day16 :: IO ()
 day16 = do
   [a, b] <- splitOn "\n\n\n" <$> readFile "input/input16.txt"
-  let tests = parseMaybe (testParser `sepBy` string "\n\n") a
-  print tests
+  let Just tests = parseMaybe (testParser `sepBy` (newline >> newline)) a
+      ins = map ((,) <$> fst . _instruction <*> validOpCode) tests
+      opcodeVec = reduce $ IM.unionsWith intersect $ map (uncurry IM.singleton) ins
+      input = map (((,) <$> head <*> V.fromList . tail) . map (read @Int) . words) $ tail $ lines b
+  print $ length $ filter ((>= 3) . length . snd) ins
+  print $ (! 0) $ foldl' (\acc f -> f acc) (V.fromList [0,0,0,0]) $ map (interpretWith opcodeVec) input
