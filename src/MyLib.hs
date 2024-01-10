@@ -115,7 +115,7 @@ firstCycle = g 0 []
     g _ _ [] = Nothing
     g i s (x : xs) = case elemIndex x s of
       Nothing -> g (i + 1) (x : s) xs
-      Just y -> Just (i - y - 1, i, x)
+      Just y -> Just (y + 1, i - y - 1, x)
 
 firstCycle' :: (Ord a) => [a] -> Maybe (Int, Int, a)
 firstCycle' = g 0 Map.empty
@@ -123,7 +123,7 @@ firstCycle' = g 0 Map.empty
     g _ _ [] = Nothing
     g i s (x : xs) = case s Map.!? x of
       Nothing -> g (i + 1) (Map.insert x i s) xs
-      Just y -> Just (i - y - 1, i, x)
+      Just y -> Just (i - y, y, x)
 
 firstRepeat' :: (Ord a) => [a] -> Maybe (Int, a)
 firstRepeat' = g 0 Set.empty

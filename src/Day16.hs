@@ -85,7 +85,7 @@ data OpCode
   | Eqir
   | Eqri
   | Eqrr
-  deriving (Show, Eq, Ord, Enum, Bounded)
+  deriving (Show, Eq, Ord, Enum, Bounded, Read)
 
 reduce :: IntMap [OpCode] -> Vector OpCode
 reduce = V.fromList . map snd . f IM.empty
