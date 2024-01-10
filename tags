@@ -43,7 +43,7 @@ Day7	/home/alex800121/haskell/aoc/2018/src/Day7.hs	1;"	m
 Day8	/home/alex800121/haskell/aoc/2018/src/Day8.hs	3;"	m
 Day9	/home/alex800121/haskell/aoc/2018/src/Day9.hs	1;"	m
 Direction	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	65;"	t
-Down	/home/alex800121/haskell/aoc/2018/src/Day17.hs	15;"	C
+Down	/home/alex800121/haskell/aoc/2018/src/Day17.hs	18;"	C
 East	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	65;"	C
 Elf	/home/alex800121/haskell/aoc/2018/src/Day15.hs	35;"	C
 Eqir	/home/alex800121/haskell/aoc/2018/src/Day16.hs	85;"	C
@@ -72,7 +72,7 @@ L	/home/alex800121/haskell/aoc/2018/src/Day13.hs	27;"	C
 Leaf	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	51;"	C
 Light	/home/alex800121/haskell/aoc/2018/src/Day10.hs	18;"	t
 M	/home/alex800121/haskell/aoc/2018/src/Day13.hs	18;"	t
-M	/home/alex800121/haskell/aoc/2018/src/Day17.hs	17;"	t
+M	/home/alex800121/haskell/aoc/2018/src/Day17.hs	20;"	t
 M	/home/alex800121/haskell/aoc/2018/src/Day6.hs	15;"	t
 Main	/home/alex800121/haskell/aoc/2018/app/Main.hs	1;"	m
 Muli	/home/alex800121/haskell/aoc/2018/src/Day16.hs	75;"	C
@@ -102,13 +102,13 @@ SZ	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	306;"	C
 Score	/home/alex800121/haskell/aoc/2018/src/Day9.hs	27;"	t
 Seti	/home/alex800121/haskell/aoc/2018/src/Day16.hs	81;"	C
 Setr	/home/alex800121/haskell/aoc/2018/src/Day16.hs	80;"	C
-Side	/home/alex800121/haskell/aoc/2018/src/Day17.hs	15;"	C
+Side	/home/alex800121/haskell/aoc/2018/src/Day17.hs	18;"	C
 Sleep	/home/alex800121/haskell/aoc/2018/src/Day4.hs	32;"	t
 Sleep	/home/alex800121/haskell/aoc/2018/src/Day4.hs	13;"	C
 South	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	65;"	C
 Space	/home/alex800121/haskell/aoc/2018/src/Day15.hs	81;"	t
 Species	/home/alex800121/haskell/aoc/2018/src/Day15.hs	35;"	t
-Stasis	/home/alex800121/haskell/aoc/2018/src/Day17.hs	15;"	C
+Stasis	/home/alex800121/haskell/aoc/2018/src/Day17.hs	18;"	C
 Test	/home/alex800121/haskell/aoc/2018/src/Day16.hs	15;"	t
 Tree	/home/alex800121/haskell/aoc/2018/src/Day8.hs	16;"	t
 Tree	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	51;"	t
@@ -120,8 +120,8 @@ Vec	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	309;"	t
 Velo	/home/alex800121/haskell/aoc/2018/src/Day10.hs	16;"	t
 Wake	/home/alex800121/haskell/aoc/2018/src/Day4.hs	13;"	C
 Wall	/home/alex800121/haskell/aoc/2018/src/Day15.hs	82;"	C
-Water	/home/alex800121/haskell/aoc/2018/src/Day17.hs	19;"	t
-WaterType	/home/alex800121/haskell/aoc/2018/src/Day17.hs	15;"	t
+Water	/home/alex800121/haskell/aoc/2018/src/Day17.hs	22;"	t
+WaterType	/home/alex800121/haskell/aoc/2018/src/Day17.hs	18;"	t
 West	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	65;"	C
 Z	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	303;"	C
 _after	/home/alex800121/haskell/aoc/2018/src/Day16.hs	18;"	f
@@ -178,7 +178,7 @@ day13	/home/alex800121/haskell/aoc/2018/src/Day13.hs	93;"	f
 day14	/home/alex800121/haskell/aoc/2018/src/Day14.hs	28;"	f
 day15	/home/alex800121/haskell/aoc/2018/src/Day15.hs	173;"	f
 day16	/home/alex800121/haskell/aoc/2018/src/Day16.hs	103;"	f
-day17	/home/alex800121/haskell/aoc/2018/src/Day17.hs	84;"	f
+day17	/home/alex800121/haskell/aoc/2018/src/Day17.hs	96;"	f
 day18	/home/alex800121/haskell/aoc/2018/src/Day18.hs	10;"	f
 day19	/home/alex800121/haskell/aoc/2018/src/Day19.hs	3;"	f
 day2	/home/alex800121/haskell/aoc/2018/src/Day2.hs	12;"	f
@@ -211,7 +211,7 @@ emcd	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	99;"	f
 extEuc	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	443;"	f
 f	/home/alex800121/haskell/aoc/2018/src/Day1.hs	7;"	f
 factors	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	288;"	f
-fillByLayer	/home/alex800121/haskell/aoc/2018/src/Day17.hs	30;"	f
+fillByLayer	/home/alex800121/haskell/aoc/2018/src/Day17.hs	33;"	f
 firstCycle	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	112;"	f
 firstCycle'	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	120;"	f
 firstRepeat	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	106;"	f
@@ -244,7 +244,7 @@ hexTo4Bits	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	218;"	f
 homepage	/home/alex800121/haskell/aoc/2018/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/build/autogen/PackageInfo_AOC2020.hs	24;"	f
 homepage	/home/alex800121/haskell/aoc/2018/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/PackageInfo_AOC2020.hs	24;"	f
 initArray	/home/alex800121/haskell/aoc/2018/src/Day11.hs	17;"	f
-initWater	/home/alex800121/haskell/aoc/2018/src/Day17.hs	81;"	f
+initWater	/home/alex800121/haskell/aoc/2018/src/Day17.hs	93;"	f
 input	/home/alex800121/haskell/aoc/2018/src/Day11.hs	11;"	f
 inputParser	/home/alex800121/haskell/aoc/2018/src/Day3.hs	12;"	f
 insertChain	/home/alex800121/haskell/aoc/2018/src/Day9.hs	59;"	f
@@ -279,7 +279,7 @@ outcome	/home/alex800121/haskell/aoc/2018/src/Day15.hs	172;"	f
 overlapEucVec	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	373;"	f
 parseDepend	/home/alex800121/haskell/aoc/2018/src/Day7.hs	19;"	f
 parseHint	/home/alex800121/haskell/aoc/2018/src/Day4.hs	15;"	f
-parseInput	/home/alex800121/haskell/aoc/2018/src/Day17.hs	64;"	f
+parseInput	/home/alex800121/haskell/aoc/2018/src/Day17.hs	76;"	f
 parseInput	/home/alex800121/haskell/aoc/2018/src/Day6.hs	32;"	f
 parseTree	/home/alex800121/haskell/aoc/2018/src/Day8.hs	18;"	f
 pathSeparator	/home/alex800121/haskell/aoc/2018/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	73;"	f
@@ -299,7 +299,7 @@ run	/home/alex800121/haskell/aoc/2018/src/Day13.hs	55;"	f
 run	/home/alex800121/haskell/aoc/2018/src/Day9.hs	31;"	f
 run'	/home/alex800121/haskell/aoc/2018/src/Day9.hs	73;"	f
 showGameState	/home/alex800121/haskell/aoc/2018/src/Day15.hs	56;"	f
-showWater	/home/alex800121/haskell/aoc/2018/src/Day17.hs	21;"	f
+showWater	/home/alex800121/haskell/aoc/2018/src/Day17.hs	24;"	f
 signedInteger	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	149;"	f
 sqrtCeiling	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	295;"	f
 stablized	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	146;"	f
