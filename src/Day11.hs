@@ -6,6 +6,7 @@ import Data.Function (on)
 import Data.List (maximumBy)
 import Data.Maybe (fromMaybe)
 import Debug.Trace
+import qualified Data.Array.IArray as I
 
 input = 9995
 
@@ -45,8 +46,9 @@ calcPower g i j@(xb, yb) = f j + f i' - f (xa, yb) - f (xb, ya)
     i'@(xa, ya) = bimap (subtract 1) (subtract 1) i
     f i = fromMaybe 0 (g !? i)
 
+(!?) :: (Ix i, I.IArray a e) => a i e -> i -> Maybe e
 a !? i
-  | inRange (bounds a) i = Just (a ! i)
+  | inRange (I.bounds a) i = Just (a I.! i)
   | otherwise = Nothing
 
 day11 :: IO ()
