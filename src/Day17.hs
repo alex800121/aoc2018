@@ -1,6 +1,8 @@
 module Day17 where
 
+import Data.Bifoldable (Bifoldable (..))
 import Data.Bifunctor (Bifunctor (..))
+import Data.Either (partitionEithers)
 import Data.IntMap (IntMap)
 import qualified Data.IntMap as IM
 import Data.IntSet (IntSet)
@@ -11,6 +13,7 @@ import Day15 (RIndex, RTuple (..))
 import MyLib
 import Text.Megaparsec
 import Text.Megaparsec.Char
+import Debug.Trace
 
 data WaterType = Down | Side | Stasis deriving (Show, Eq, Enum, Ord, Bounded)
 
@@ -29,9 +32,12 @@ showWater m w = unlines $ drawGraph (fromMaybe ' ') $ Map.union m' w'
 
 fillByLayer :: Int -> M -> Int -> Water -> Water
 fillByLayer limit m n w
+  -- | trace (showWater m w) False = undefined
   | n >= limit = w
-  | otherwise = undefined
+  | IM.null stasis = fillByLayer limit m (n + 1) w'
+  | otherwise = fillByLayer limit m (n - 1) w'
   where
+    w' = IM.insert n currentLayerW' $ IM.insert (n + 1) nextLayerW' w
     currentLayerW = fromMaybe IM.empty $ w IM.!? n
     currentLayerM = fromMaybe IS.empty $ m IM.!? n
     nextLayerW = fromMaybe IM.empty $ w IM.!? (n + 1)
@@ -48,9 +54,15 @@ fillByLayer limit m n w
         )
         (IM.empty, [])
         currentLayerW
-    x = map (flowSide (IM.empty, IM.empty) IS.empty . IS.singleton) toSide
+    (stasis, (down, side)) =
+      bimap IM.unions (bimap IM.unions IM.unions . unzip)
+        . partitionEithers
+        $ map (flowSide (IM.empty, IM.empty) IS.empty . IS.singleton) toSide
+    down' = IM.union down flowDown
+    currentLayerW' = IM.union (IM.unions [flowDown, stasis, down', side]) currentLayerW
+    nextLayerW' = IM.union down' nextLayerW
     flowSide acc visited start
-      | IS.null start = acc'
+      | IS.null start = if IM.null (fst acc') then Left $ IM.map (const Stasis) $ snd acc' else Right acc'
       | otherwise = flowSide acc' visited' start'
       where
         visited' = IS.union visited start
@@ -84,5 +96,11 @@ initWater = IM.singleton 0 (IM.singleton 500 Down)
 day17 :: IO ()
 day17 = do
   input' <- IM.unionsWith IS.union . mapMaybe (parseMaybe parseInput) . lines <$> readFile "input/input17.txt"
-  input' <- IM.unionsWith IS.union . mapMaybe (parseMaybe parseInput) . lines <$> readFile "input/test17.txt"
-  putStrLn $ showWater input' initWater
+  -- input' <- IM.unionsWith IS.union . mapMaybe (parseMaybe parseInput) . lines <$> readFile "input/test17.txt"
+  let (minY, maxY) = (,) <$> minimum <*> maximum $ IM.keys input'
+      ans = fillByLayer maxY input' 0 initWater
+      m = showWater input' ans
+  -- writeFile "output" m
+  -- print $ length $ filter (`elem` "|.~") m
+  print $ sum $ IM.map length $ IM.filterWithKey (\k _ -> k >= minY && k <= maxY) ans
+  print $ sum $ IM.map (length . IM.filter (== Stasis)) $ IM.filterWithKey (\k a -> k >= minY && k <= maxY) ans
