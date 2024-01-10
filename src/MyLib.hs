@@ -113,8 +113,16 @@ firstCycle :: (Eq a) => [a] -> Maybe (Int, Int, a)
 firstCycle = g 0 []
   where
     g _ _ [] = Nothing
-    g i s (x : xs) = case findIndex (== x) s of
+    g i s (x : xs) = case elemIndex x s of
       Nothing -> g (i + 1) (x : s) xs
+      Just y -> Just (i - y - 1, i, x)
+
+firstCycle' :: (Ord a) => [a] -> Maybe (Int, Int, a)
+firstCycle' = g 0 Map.empty
+  where
+    g _ _ [] = Nothing
+    g i s (x : xs) = case s Map.!? x of
+      Nothing -> g (i + 1) (Map.insert x i s) xs
       Just y -> Just (i - y - 1, i, x)
 
 firstRepeat' :: (Ord a) => [a] -> Maybe (Int, a)
