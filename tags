@@ -9,6 +9,7 @@ Bani	/home/alex800121/haskell/aoc/2018/src/Day16.hs	77;"	C
 Banr	/home/alex800121/haskell/aoc/2018/src/Day16.hs	76;"	C
 Bori	/home/alex800121/haskell/aoc/2018/src/Day16.hs	79;"	C
 Borr	/home/alex800121/haskell/aoc/2018/src/Day16.hs	78;"	C
+Branch	/home/alex800121/haskell/aoc/2018/src/Day20.hs	10;"	C
 Branch	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	51;"	C
 C	/home/alex800121/haskell/aoc/2018/src/Day13.hs	20;"	C
 Cart	/home/alex800121/haskell/aoc/2018/src/Day13.hs	20;"	t
@@ -29,7 +30,7 @@ Day17	/home/alex800121/haskell/aoc/2018/src/Day17.hs	1;"	m
 Day18	/home/alex800121/haskell/aoc/2018/src/Day18.hs	1;"	m
 Day19	/home/alex800121/haskell/aoc/2018/src/Day19.hs	1;"	m
 Day2	/home/alex800121/haskell/aoc/2018/src/Day2.hs	1;"	m
-Day20	/home/alex800121/haskell/aoc/2018/src/Day20.hs	1;"	m
+Day20	/home/alex800121/haskell/aoc/2018/src/Day20.hs	2;"	m
 Day21	/home/alex800121/haskell/aoc/2018/src/Day21.hs	1;"	m
 Day22	/home/alex800121/haskell/aoc/2018/src/Day22.hs	1;"	m
 Day23	/home/alex800121/haskell/aoc/2018/src/Day23.hs	1;"	m
@@ -72,6 +73,7 @@ Index	/home/alex800121/haskell/aoc/2018/src/Day6.hs	17;"	t
 Instruction	/home/alex800121/haskell/aoc/2018/src/Day19.hs	10;"	t
 KnotList	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	158;"	t
 L	/home/alex800121/haskell/aoc/2018/src/Day13.hs	27;"	C
+Leaf	/home/alex800121/haskell/aoc/2018/src/Day20.hs	10;"	C
 Leaf	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	51;"	C
 Light	/home/alex800121/haskell/aoc/2018/src/Day10.hs	18;"	t
 M	/home/alex800121/haskell/aoc/2018/src/Day13.hs	18;"	t
@@ -113,12 +115,14 @@ Space	/home/alex800121/haskell/aoc/2018/src/Day15.hs	81;"	t
 Species	/home/alex800121/haskell/aoc/2018/src/Day15.hs	35;"	t
 Stasis	/home/alex800121/haskell/aoc/2018/src/Day17.hs	18;"	C
 Test	/home/alex800121/haskell/aoc/2018/src/Day16.hs	15;"	t
+Tree	/home/alex800121/haskell/aoc/2018/src/Day20.hs	13;"	t
 Tree	/home/alex800121/haskell/aoc/2018/src/Day8.hs	16;"	t
 Tree	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	51;"	t
 Tree	/home/alex800121/haskell/aoc/2018/src/Day8.hs	10;"	C
 Tree'	/home/alex800121/haskell/aoc/2018/src/Day8.hs	10;"	t
 Turn	/home/alex800121/haskell/aoc/2018/src/Day13.hs	27;"	t
 Unit	/home/alex800121/haskell/aoc/2018/src/Day15.hs	26;"	t
+Unit	/home/alex800121/haskell/aoc/2018/src/Day20.hs	10;"	t
 Vec	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	309;"	t
 Velo	/home/alex800121/haskell/aoc/2018/src/Day10.hs	16;"	t
 Wake	/home/alex800121/haskell/aoc/2018/src/Day4.hs	13;"	C
@@ -186,7 +190,7 @@ day17	/home/alex800121/haskell/aoc/2018/src/Day17.hs	96;"	f
 day18	/home/alex800121/haskell/aoc/2018/src/Day18.hs	39;"	f
 day19	/home/alex800121/haskell/aoc/2018/src/Day19.hs	30;"	f
 day2	/home/alex800121/haskell/aoc/2018/src/Day2.hs	12;"	f
-day20	/home/alex800121/haskell/aoc/2018/src/Day20.hs	23;"	f
+day20	/home/alex800121/haskell/aoc/2018/src/Day20.hs	15;"	f
 day21	/home/alex800121/haskell/aoc/2018/src/Day21.hs	3;"	f
 day22	/home/alex800121/haskell/aoc/2018/src/Day22.hs	3;"	f
 day23	/home/alex800121/haskell/aoc/2018/src/Day23.hs	3;"	f
@@ -204,8 +208,6 @@ day8	/home/alex800121/haskell/aoc/2018/src/Day8.hs	32;"	f
 day9	/home/alex800121/haskell/aoc/2018/src/Day9.hs	102;"	f
 deleteChain	/home/alex800121/haskell/aoc/2018/src/Day9.hs	66;"	f
 deletePair	/home/alex800121/haskell/aoc/2018/src/Day5.hs	5;"	f
-direction	/home/alex800121/haskell/aoc/2018/src/Day20.hs	15;"	f
-divergence	/home/alex800121/haskell/aoc/2018/src/Day20.hs	17;"	f
 drawASCII	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	31;"	f
 drawArray	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	226;"	f
 drawGraph	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	254;"	f
@@ -339,7 +341,6 @@ toVec	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	409;"	f
 turn	/home/alex800121/haskell/aoc/2018/src/Day13.hs	38;"	f
 turn	/home/alex800121/haskell/aoc/2018/src/Day15.hs	118;"	f
 twistKnotList	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	160;"	f
-unit	/home/alex800121/haskell/aoc/2018/src/Day20.hs	10;"	f
 vModify	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	427;"	f
 vRead	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	421;"	f
 vTail	/home/alex800121/haskell/aoc/2018/src/MyLib.hs	418;"	f
