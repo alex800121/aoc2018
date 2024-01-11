@@ -1,24 +1,16 @@
+{-# LANGUAGE DeriveFunctor #-}
 module Day20 where
 
-import MyLib
-import Text.Megaparsec.Char
-import Text.Megaparsec
 import Data.Char (isAlpha)
+import Text.Megaparsec
+import Text.Megaparsec.Char
 
 type Index = (Int, Int)
 
-unit :: Parser [String]
-unit = do
-  a <- many (divergence <|> direction)
-  return $ foldr (\x acc -> undefined) [] a
+data Unit c = Leaf [c] | Branch [Tree c]
+  deriving (Show, Eq, Ord, Functor)
 
-direction = many (satisfy isAlpha)
-
-divergence = do
-  char '('
-  a <- unit `sepBy` char '|'
-  char ')'
-  return a
+type Tree c = [Unit c]
 
 day20 :: IO ()
 day20 = do
