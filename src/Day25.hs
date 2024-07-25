@@ -1,5 +1,6 @@
 module Day25 where
 
+import Paths_AOC2018
 import Data.List.Split (splitOn)
 import Data.List (partition)
 
@@ -18,6 +19,6 @@ constellations (x : xs) = go [] [] [x] xs
 
 day25 :: IO ()
 day25 = do
-  input <- map (map (read @Int) . splitOn ",") . lines <$> readFile "input/input25.txt"
+  input <- map (map (read @Int) . splitOn ",") . lines <$> (getDataDir >>= readFile . (++ "/input/input25.txt"))
   -- input <- map (map (read @Int) . splitOn ",") . lines <$> readFile "input/test25.txt"
   print $ length $ constellations input

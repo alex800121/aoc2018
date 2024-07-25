@@ -1,5 +1,6 @@
 module Day7 where
 
+import Paths_AOC2018
 import Data.Map (Map)
 import qualified Data.Map as Map
 import Data.Maybe (mapMaybe)
@@ -50,7 +51,7 @@ day7b n added = f 0 [] Set.empty
 
 day7 :: IO ()
 day7 = do
-  input <- Map.unionsWith (<>) . mapMaybe (parseMaybe parseDepend) . lines <$> readFile "input/input7.txt"
+  input <- Map.unionsWith (<>) . mapMaybe (parseMaybe parseDepend) . lines <$> (getDataDir >>= readFile . (++ "/input/input7.txt"))
   -- input <- Map.unionsWith (<>) . mapMaybe (parseMaybe parseDepend) . lines <$> readFile "input/test7.txt"
   let start = Set.unions (Map.elems input) Set.\\ Map.keysSet input
       input' = Map.union input (Map.fromSet (const Set.empty) start)

@@ -2,6 +2,7 @@
 
 module Day24 where
 
+import Paths_AOC2018
 import Control.Lens
 import Control.Monad (guard, join)
 import Data.Bifunctor (Bifunctor (..))
@@ -149,7 +150,7 @@ parseArmy s = do
 
 day24 :: IO ()
 day24 = do
-  Just input <- parseMaybe parseInput <$> readFile "input/input24.txt"
+  Just input <- parseMaybe parseInput <$> (getDataDir >>= readFile . (++ "/input/input24.txt"))
   -- Just input <- parseMaybe parseInput <$> readFile "input/test24.txt"
   let input' = map (\n -> fmap (\x -> if view system x == Immune then over (ap . _2) (+ n) x else x) input) [1 ..]
       a f i = do

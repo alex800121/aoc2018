@@ -1,5 +1,6 @@
 module Day12 where
 
+import Paths_AOC2018
 import Data.Array
 import Data.Function (on)
 import Data.List (groupBy)
@@ -35,7 +36,7 @@ buildGen s gen rule = output
 
 day12 :: IO ()
 day12 = do
-  g : r : _ <- splitOn "\n\n" <$> readFile "input/input12.txt"
+  g : r : _ <- splitOn "\n\n" <$> (getDataDir >>= readFile . (++ "/input/input12.txt"))
   -- g : r : _ <- splitOn "\n\n" <$> readFile "input/test12.txt"
   let initState = map (== '#') $ drop (length "initial state: ") g
       rules = Map.fromList $ map ((\[x, y] -> (x, head y)) . map (map (== '#')) . splitOn " => ") $ lines r

@@ -1,5 +1,6 @@
 module Day6 where
 
+import Paths_AOC2018
 import Data.Array.Unboxed (UArray)
 import qualified Data.Array.Unboxed as U
 import Data.List (findIndex, intersect, sort, tails)
@@ -54,7 +55,7 @@ calc i limit = sum $ map snd ys
 
 day6 :: IO ()
 day6 = do
-  input <- parseInput <$> readFile "input/input6.txt"
+  input <- parseInput <$> (getDataDir >>= readFile . (++ "/input/input6.txt"))
   -- input <- parseInput <$> readFile "input/test6.txt"
   let f = Map.fromList $ zip (Map.keys input) (['a' .. 'z'] ++ ['A' .. 'Z'])
       xs = iterate step input

@@ -2,6 +2,7 @@
 
 module Day20 where
 
+import Paths_AOC2018
 import Data.Bifunctor (Bifunctor (..))
 import Data.Char (isAlpha)
 import Data.Map.Strict (Map)
@@ -69,7 +70,7 @@ adjacent = [(0, 1), (0, -1), (1, 0), (-1, 0)]
 
 day20 :: IO ()
 day20 = do
-  input <- init <$> readFile "input/input20.txt"
+  input <- init <$> (getDataDir >>= readFile . (++ "/input/input20.txt"))
   -- input <- init <$> readFile "input/test20.txt"
   let Just t = fmap (fmap fromChar) <$> parseMaybe regex input
       ans = bfs (0, 0) $ buildMap t

@@ -1,5 +1,6 @@
 module Day18 where
 
+import Paths_AOC2018
 import Data.Array.Unboxed (UArray)
 import qualified Data.Array.Unboxed as U
 import Data.Bifunctor (Bifunctor (..))
@@ -38,7 +39,7 @@ step y = y'
 
 day18 :: IO ()
 day18 = do
-  input <- drawArray @UArray . lines <$> readFile "input/input18.txt"
+  input <- drawArray @UArray . lines <$> (getDataDir >>= readFile . (++ "/input/input18.txt"))
   -- input <- drawArray @UArray . lines <$> readFile "input/test18.txt"
   let ans = iterate step input
       Just (c, i) = ((,) <$> view _1 <*> view _2) <$> firstCycle' ans
