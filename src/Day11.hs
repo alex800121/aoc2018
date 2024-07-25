@@ -1,5 +1,6 @@
 module Day11 where
 
+import Paths_AOC2018
 import Data.Array
 import Data.Bifunctor (Bifunctor (..))
 import Data.Function (on)

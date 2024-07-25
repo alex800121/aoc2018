@@ -2,6 +2,7 @@
 
 module Day13 where
 
+import Paths_AOC2018
 import Control.Monad (foldM)
 import Data.Array.Unboxed
 import Data.Bifunctor (Bifunctor (..))
@@ -92,7 +93,7 @@ compareSwap = compare `on` swap . _index
 
 day13 :: IO ()
 day13 = do
-  (cart, m) <- readInput . drawArray @UArray . lines <$> readFile "input/input13.txt"
+  (cart, m) <- readInput . drawArray @UArray . lines <$> (getDataDir >>= readFile . (++ "/input/input13.txt"))
   -- (cart, m) <- readInput . drawArray @UArray . lines <$> readFile "input/test13.txt"
   let ans = run m cart
   print $ last $ fst ans

@@ -1,5 +1,6 @@
 module Day16 where
 
+import Paths_AOC2018
 import Data.Bits (Bits (..))
 import Data.Vector (Vector, (!), (//))
 import qualified Data.Vector as V
@@ -102,7 +103,7 @@ reduce = V.fromList . map snd . f IM.empty
 
 day16 :: IO ()
 day16 = do
-  [a, b] <- splitOn "\n\n\n" <$> readFile "input/input16.txt"
+  [a, b] <- splitOn "\n\n\n" <$> (getDataDir >>= readFile . (++ "/input/input16.txt"))
   let Just tests = parseMaybe (testParser `sepBy` (newline >> newline)) a
       ins = map ((,) <$> fst . _instruction <*> validOpCode) tests
       opcodeVec = reduce $ IM.unionsWith intersect $ map (uncurry IM.singleton) ins

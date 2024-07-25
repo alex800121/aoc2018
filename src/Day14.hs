@@ -1,6 +1,7 @@
 {-# LANGUAGE BangPatterns #-}
 module Day14 where
 
+import Paths_AOC2018
 import Data.Char (digitToInt, intToDigit)
 import Data.Sequence (Seq (..))
 import qualified Data.Sequence as S

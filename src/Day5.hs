@@ -1,5 +1,6 @@
 module Day5 where
 
+import Paths_AOC2018
 import Data.Char
 
 deletePair :: String -> String
@@ -16,6 +17,6 @@ alphaList = [[x, toUpper x] | x <- ['a' .. 'z']]
 
 day5 :: IO ()
 day5 = do
-  input <- filter isAlpha <$> readFile "input/input5.txt"
+  input <- filter isAlpha <$> (getDataDir >>= readFile . (++ "/input/input5.txt"))
   print $ length $ deletePair input
   print $ minimum $ map (\xs -> length $ deletePair $ filter (`notElem` xs) input) alphaList

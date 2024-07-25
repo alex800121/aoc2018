@@ -1,5 +1,6 @@
 module Day17 where
 
+import Paths_AOC2018
 import Data.Bifoldable (Bifoldable (..))
 import Data.Bifunctor (Bifunctor (..))
 import Data.Either (partitionEithers)
@@ -95,7 +96,7 @@ initWater = IM.singleton 0 (IM.singleton 500 Down)
 
 day17 :: IO ()
 day17 = do
-  input' <- IM.unionsWith IS.union . mapMaybe (parseMaybe parseInput) . lines <$> readFile "input/input17.txt"
+  input' <- IM.unionsWith IS.union . mapMaybe (parseMaybe parseInput) . lines <$> (getDataDir >>= readFile . (++ "/input/input17.txt"))
   -- input' <- IM.unionsWith IS.union . mapMaybe (parseMaybe parseInput) . lines <$> readFile "input/test17.txt"
   let (minY, maxY) = (,) <$> minimum <*> maximum $ IM.keys input'
       ans = fillByLayer maxY input' 0 initWater

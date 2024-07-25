@@ -1,5 +1,6 @@
 module Day23 where
 
+import Paths_AOC2018
 import Data.Foldable (maximumBy)
 import Data.Function (on)
 import Data.IntMap (IntMap)
@@ -101,7 +102,7 @@ inRange' a b = manhattan (fst a) (fst b) <= snd a
 
 day23 :: IO ()
 day23 = do
-  input <- map (fromJust . parseMaybe parseBot) . lines <$> readFile "input/input23.txt"
+  input <- map (fromJust . parseMaybe parseBot) . lines <$> (getDataDir >>= readFile . (++ "/input/input23.txt"))
   -- input <- map (fromJust . parseMaybe parseBot) . lines <$> readFile "input/test23.txt"
   let maxR = maximum $ map (manhattan (0, 0, 0) . fst) input
       input' = map convertBot input

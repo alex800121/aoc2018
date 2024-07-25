@@ -1,5 +1,6 @@
 module Day19 where
 
+import Paths_AOC2018
 import Data.Char (toUpper)
 import Data.Vector (Vector, (!), (//))
 import qualified Data.Vector as V
@@ -29,7 +30,7 @@ parseReg = read @Int . last . words
 initVec = V.fromList (replicate 6 0)
 day19 :: IO ()
 day19 = do
-  input <- parseInput <$> readFile "input/input19.txt"
+  input <- parseInput <$> (getDataDir >>= readFile . (++ "/input/input19.txt"))
   -- input <- parseInput <$> readFile "input/test19.txt"
   let ansA = (! 4) $ (!! 20) $ uncurry run input initVec
       ansB = (! 4) $ (!! 20) $ uncurry run input $ V.modify (\x -> M.write x 0 1) initVec

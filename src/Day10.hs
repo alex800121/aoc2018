@@ -1,6 +1,7 @@
 {-# LANGUAGE LambdaCase #-}
 module Day10 where
 
+import Paths_AOC2018
 import Data.Maybe (mapMaybe)
 import Data.Set (Set)
 import qualified Data.Set as Set
@@ -56,7 +57,7 @@ lightParser = do
 
 day10 :: IO ()
 day10 = do
-  input <- Set.fromList . mapMaybe (parseMaybe lightParser) . lines <$> readFile "input/input10.txt"
+  input <- Set.fromList . mapMaybe (parseMaybe lightParser) . lines <$> (getDataDir >>= readFile . (++ "/input/input10.txt"))
   let (n, g) = second head $ calcGraph 0 input
   putStrLn . unlines . drawGraph (\case Just _ -> '#'; _ -> ' ') . Map.fromSet (const ()) . Set.map fst $ g 
   print n

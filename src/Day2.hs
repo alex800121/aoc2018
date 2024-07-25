@@ -1,5 +1,6 @@
 module Day2 where
 
+import Paths_AOC2018
 import Data.MultiSet (MultiSet)
 import qualified Data.MultiSet as MS
 import Data.List (subsequences, (\\), find, intersect)
@@ -11,6 +12,6 @@ day2b (x : xs) = maybe (day2b xs) (`intersect` x) (find (\y -> 1 == length (filt
   
 day2 :: IO ()
 day2 = do
-  input <- lines <$> readFile "input/input2.txt"
+  input <- lines <$> (getDataDir >>= readFile . (++ "/input/input2.txt"))
   print $ product $ map (\x -> length $ filter (any ((== x) . snd) . MS.toOccurList) $ map MS.fromList input) [2, 3]
   putStrLn $ day2b input
