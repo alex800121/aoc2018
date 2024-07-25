@@ -1,6 +1,8 @@
 module Day17 where
 
+import Paths_AOC2018
+
 day17 :: IO ()
 day17 = do
-  -- input <- readFile "input/input17.txt"
+  -- input <- (getDataDir >>= readFile (++ "/input/input17.txt"))
   return ()
