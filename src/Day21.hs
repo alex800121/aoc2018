@@ -4,5 +4,5 @@ import Paths_AOC2018
 
 day21 :: IO ()
 day21 = do
-  -- input <- (getDataDir >>= readFile (++ "/input/input21.txt"))
+  -- input <- (getDataDir >>= readFile . (++ "/input/input21.txt"))
   return ()

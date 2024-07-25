@@ -141,6 +141,7 @@ D	/home/alex800121/haskell/aoc/2023/src/Day19.hs	29;"	C
 Day1	/home/alex800121/haskell/aoc/2015/src/Day1.hs	1;"	m
 Day1	/home/alex800121/haskell/aoc/2016/src/Day1.hs	1;"	m
 Day1	/home/alex800121/haskell/aoc/2017/src/Day1.hs	1;"	m
+Day1	/home/alex800121/haskell/aoc/2018/src/Day1.hs	1;"	m
 Day1	/home/alex800121/haskell/aoc/2019/src/Day1.hs	1;"	m
 Day1	/home/alex800121/haskell/aoc/2020/src/Day1.hs	1;"	m
 Day1	/home/alex800121/haskell/aoc/2021/src/Day1.hs	1;"	m
@@ -149,6 +150,7 @@ Day1	/home/alex800121/haskell/aoc/2023/src/Day1.hs	1;"	m
 Day10	/home/alex800121/haskell/aoc/2015/src/Day10.hs	1;"	m
 Day10	/home/alex800121/haskell/aoc/2016/src/Day10.hs	3;"	m
 Day10	/home/alex800121/haskell/aoc/2017/src/Day10.hs	1;"	m
+Day10	/home/alex800121/haskell/aoc/2018/src/Day10.hs	1;"	m
 Day10	/home/alex800121/haskell/aoc/2019/src/Day10.hs	3;"	m
 Day10	/home/alex800121/haskell/aoc/2020/src/Day10.hs	1;"	m
 Day10	/home/alex800121/haskell/aoc/2021/src/Day10.hs	1;"	m
@@ -157,6 +159,7 @@ Day10	/home/alex800121/haskell/aoc/2023/src/Day10.hs	1;"	m
 Day11	/home/alex800121/haskell/aoc/2015/src/Day11.hs	1;"	m
 Day11	/home/alex800121/haskell/aoc/2016/src/Day11.hs	1;"	m
 Day11	/home/alex800121/haskell/aoc/2017/src/Day11.hs	1;"	m
+Day11	/home/alex800121/haskell/aoc/2018/src/Day11.hs	1;"	m
 Day11	/home/alex800121/haskell/aoc/2019/src/Day11.hs	3;"	m
 Day11	/home/alex800121/haskell/aoc/2020/src/Day11.hs	2;"	m
 Day11	/home/alex800121/haskell/aoc/2021/src/Day11.hs	3;"	m
@@ -165,6 +168,7 @@ Day11	/home/alex800121/haskell/aoc/2023/src/Day11.hs	3;"	m
 Day12	/home/alex800121/haskell/aoc/2015/src/Day12.hs	1;"	m
 Day12	/home/alex800121/haskell/aoc/2016/src/Day12.hs	1;"	m
 Day12	/home/alex800121/haskell/aoc/2017/src/Day12.hs	1;"	m
+Day12	/home/alex800121/haskell/aoc/2018/src/Day12.hs	1;"	m
 Day12	/home/alex800121/haskell/aoc/2019/src/Day12.hs	2;"	m
 Day12	/home/alex800121/haskell/aoc/2020/src/Day12.hs	1;"	m
 Day12	/home/alex800121/haskell/aoc/2021/src/Day12.hs	3;"	m
@@ -173,6 +177,7 @@ Day12	/home/alex800121/haskell/aoc/2023/src/Day12.hs	1;"	m
 Day13	/home/alex800121/haskell/aoc/2015/src/Day13.hs	1;"	m
 Day13	/home/alex800121/haskell/aoc/2016/src/Day13.hs	1;"	m
 Day13	/home/alex800121/haskell/aoc/2017/src/Day13.hs	1;"	m
+Day13	/home/alex800121/haskell/aoc/2018/src/Day13.hs	1;"	m
 Day13	/home/alex800121/haskell/aoc/2019/src/Day13.hs	3;"	m
 Day13	/home/alex800121/haskell/aoc/2020/src/Day13.hs	1;"	m
 Day13	/home/alex800121/haskell/aoc/2021/src/Day13.hs	3;"	m
@@ -181,6 +186,7 @@ Day13	/home/alex800121/haskell/aoc/2023/src/Day13.hs	1;"	m
 Day14	/home/alex800121/haskell/aoc/2015/src/Day14.hs	1;"	m
 Day14	/home/alex800121/haskell/aoc/2016/src/Day14.hs	4;"	m
 Day14	/home/alex800121/haskell/aoc/2017/src/Day14.hs	1;"	m
+Day14	/home/alex800121/haskell/aoc/2018/src/Day14.hs	1;"	m
 Day14	/home/alex800121/haskell/aoc/2019/src/Day14.hs	1;"	m
 Day14	/home/alex800121/haskell/aoc/2020/src/Day14.hs	3;"	m
 Day14	/home/alex800121/haskell/aoc/2021/src/Day14.hs	1;"	m
@@ -189,6 +195,7 @@ Day14	/home/alex800121/haskell/aoc/2023/src/Day14.hs	1;"	m
 Day15	/home/alex800121/haskell/aoc/2015/src/Day15.hs	1;"	m
 Day15	/home/alex800121/haskell/aoc/2016/src/Day15.hs	1;"	m
 Day15	/home/alex800121/haskell/aoc/2017/src/Day15.hs	1;"	m
+Day15	/home/alex800121/haskell/aoc/2018/src/Day15.hs	1;"	m
 Day15	/home/alex800121/haskell/aoc/2019/src/Day15.hs	3;"	m
 Day15	/home/alex800121/haskell/aoc/2020/src/Day15.hs	3;"	m
 Day15	/home/alex800121/haskell/aoc/2021/src/Day15.hs	3;"	m
@@ -197,6 +204,7 @@ Day15	/home/alex800121/haskell/aoc/2023/src/Day15.hs	1;"	m
 Day16	/home/alex800121/haskell/aoc/2015/src/Day16.hs	1;"	m
 Day16	/home/alex800121/haskell/aoc/2016/src/Day16.hs	1;"	m
 Day16	/home/alex800121/haskell/aoc/2017/src/Day16.hs	1;"	m
+Day16	/home/alex800121/haskell/aoc/2018/src/Day16.hs	1;"	m
 Day16	/home/alex800121/haskell/aoc/2019/src/Day16.hs	1;"	m
 Day16	/home/alex800121/haskell/aoc/2020/src/Day16.hs	1;"	m
 Day16	/home/alex800121/haskell/aoc/2021/src/Day16.hs	1;"	m
@@ -205,6 +213,7 @@ Day16	/home/alex800121/haskell/aoc/2023/src/Day16.hs	3;"	m
 Day17	/home/alex800121/haskell/aoc/2015/src/Day17.hs	1;"	m
 Day17	/home/alex800121/haskell/aoc/2016/src/Day17.hs	4;"	m
 Day17	/home/alex800121/haskell/aoc/2017/src/Day17.hs	1;"	m
+Day17	/home/alex800121/haskell/aoc/2018/src/Day17.hs	1;"	m
 Day17	/home/alex800121/haskell/aoc/2019/src/Day17.hs	3;"	m
 Day17	/home/alex800121/haskell/aoc/2020/src/Day17.hs	4;"	m
 Day17	/home/alex800121/haskell/aoc/2021/src/Day17.hs	1;"	m
@@ -213,6 +222,7 @@ Day17	/home/alex800121/haskell/aoc/2023/src/Day17.hs	1;"	m
 Day18	/home/alex800121/haskell/aoc/2015/src/Day18.hs	1;"	m
 Day18	/home/alex800121/haskell/aoc/2016/src/Day18.hs	1;"	m
 Day18	/home/alex800121/haskell/aoc/2017/src/Day18.hs	1;"	m
+Day18	/home/alex800121/haskell/aoc/2018/src/Day18.hs	1;"	m
 Day18	/home/alex800121/haskell/aoc/2019/src/Day18.hs	4;"	m
 Day18	/home/alex800121/haskell/aoc/2020/src/Day18.hs	3;"	m
 Day18	/home/alex800121/haskell/aoc/2021/src/Day18.hs	3;"	m
@@ -221,6 +231,7 @@ Day18	/home/alex800121/haskell/aoc/2023/src/Day18.hs	3;"	m
 Day19	/home/alex800121/haskell/aoc/2015/src/Day19.hs	5;"	m
 Day19	/home/alex800121/haskell/aoc/2016/src/Day19.hs	1;"	m
 Day19	/home/alex800121/haskell/aoc/2017/src/Day19.hs	1;"	m
+Day19	/home/alex800121/haskell/aoc/2018/src/Day19.hs	1;"	m
 Day19	/home/alex800121/haskell/aoc/2019/src/Day19.hs	1;"	m
 Day19	/home/alex800121/haskell/aoc/2020/src/Day19.hs	1;"	m
 Day19	/home/alex800121/haskell/aoc/2021/src/Day19.hs	1;"	m
@@ -229,6 +240,7 @@ Day19	/home/alex800121/haskell/aoc/2023/src/Day19.hs	1;"	m
 Day2	/home/alex800121/haskell/aoc/2015/src/Day2.hs	1;"	m
 Day2	/home/alex800121/haskell/aoc/2016/src/Day2.hs	1;"	m
 Day2	/home/alex800121/haskell/aoc/2017/src/Day2.hs	1;"	m
+Day2	/home/alex800121/haskell/aoc/2018/src/Day2.hs	1;"	m
 Day2	/home/alex800121/haskell/aoc/2019/src/Day2.hs	1;"	m
 Day2	/home/alex800121/haskell/aoc/2020/src/Day2.hs	1;"	m
 Day2	/home/alex800121/haskell/aoc/2021/src/Day2.hs	1;"	m
@@ -237,6 +249,7 @@ Day2	/home/alex800121/haskell/aoc/2023/src/Day2.hs	1;"	m
 Day20	/home/alex800121/haskell/aoc/2015/src/Day20.hs	1;"	m
 Day20	/home/alex800121/haskell/aoc/2016/src/Day20.hs	1;"	m
 Day20	/home/alex800121/haskell/aoc/2017/src/Day20.hs	1;"	m
+Day20	/home/alex800121/haskell/aoc/2018/src/Day20.hs	1;"	m
 Day20	/home/alex800121/haskell/aoc/2019/src/Day20.hs	3;"	m
 Day20	/home/alex800121/haskell/aoc/2020/src/Day20.hs	4;"	m
 Day20	/home/alex800121/haskell/aoc/2021/src/Day20.hs	3;"	m
@@ -245,6 +258,7 @@ Day20	/home/alex800121/haskell/aoc/2023/src/Day20.hs	6;"	m
 Day21	/home/alex800121/haskell/aoc/2015/src/Day21.hs	3;"	m
 Day21	/home/alex800121/haskell/aoc/2016/src/Day21.hs	1;"	m
 Day21	/home/alex800121/haskell/aoc/2017/src/Day21.hs	1;"	m
+Day21	/home/alex800121/haskell/aoc/2018/src/Day21.hs	1;"	m
 Day21	/home/alex800121/haskell/aoc/2019/src/Day21.hs	1;"	m
 Day21	/home/alex800121/haskell/aoc/2020/src/Day21.hs	1;"	m
 Day21	/home/alex800121/haskell/aoc/2021/src/Day21.hs	1;"	m
@@ -253,6 +267,7 @@ Day21	/home/alex800121/haskell/aoc/2023/src/Day21.hs	4;"	m
 Day22	/home/alex800121/haskell/aoc/2015/src/Day22.hs	6;"	m
 Day22	/home/alex800121/haskell/aoc/2016/src/Day22.hs	1;"	m
 Day22	/home/alex800121/haskell/aoc/2017/src/Day22.hs	1;"	m
+Day22	/home/alex800121/haskell/aoc/2018/src/Day22.hs	1;"	m
 Day22	/home/alex800121/haskell/aoc/2019/src/Day22.hs	4;"	m
 Day22	/home/alex800121/haskell/aoc/2020/src/Day22.hs	1;"	m
 Day22	/home/alex800121/haskell/aoc/2021/src/Day22.hs	1;"	m
@@ -261,6 +276,7 @@ Day22	/home/alex800121/haskell/aoc/2023/src/Day22.hs	1;"	m
 Day23	/home/alex800121/haskell/aoc/2015/src/Day23.hs	1;"	m
 Day23	/home/alex800121/haskell/aoc/2016/src/Day23.hs	1;"	m
 Day23	/home/alex800121/haskell/aoc/2017/src/Day23.hs	1;"	m
+Day23	/home/alex800121/haskell/aoc/2018/src/Day23.hs	1;"	m
 Day23	/home/alex800121/haskell/aoc/2019/src/Day23.hs	3;"	m
 Day23	/home/alex800121/haskell/aoc/2020/src/Day23.hs	1;"	m
 Day23	/home/alex800121/haskell/aoc/2021/src/Day23.hs	3;"	m
@@ -269,6 +285,7 @@ Day23	/home/alex800121/haskell/aoc/2023/src/Day23.hs	1;"	m
 Day24	/home/alex800121/haskell/aoc/2015/src/Day24.hs	1;"	m
 Day24	/home/alex800121/haskell/aoc/2016/src/Day24.hs	1;"	m
 Day24	/home/alex800121/haskell/aoc/2017/src/Day24.hs	1;"	m
+Day24	/home/alex800121/haskell/aoc/2018/src/Day24.hs	1;"	m
 Day24	/home/alex800121/haskell/aoc/2019/src/Day24.hs	4;"	m
 Day24	/home/alex800121/haskell/aoc/2020/src/Day24.hs	3;"	m
 Day24	/home/alex800121/haskell/aoc/2021/src/Day24'.hs	3;"	m
@@ -278,6 +295,7 @@ Day24	/home/alex800121/haskell/aoc/2023/src/Day24.hs	1;"	m
 Day25	/home/alex800121/haskell/aoc/2015/src/Day25.hs	1;"	m
 Day25	/home/alex800121/haskell/aoc/2016/src/Day25.hs	1;"	m
 Day25	/home/alex800121/haskell/aoc/2017/src/Day25.hs	1;"	m
+Day25	/home/alex800121/haskell/aoc/2018/src/Day25.hs	1;"	m
 Day25	/home/alex800121/haskell/aoc/2019/src/Day25.hs	1;"	m
 Day25	/home/alex800121/haskell/aoc/2020/src/Day25.hs	1;"	m
 Day25	/home/alex800121/haskell/aoc/2021/src/Day25.hs	3;"	m
@@ -286,6 +304,7 @@ Day25	/home/alex800121/haskell/aoc/2023/src/Day25.hs	3;"	m
 Day3	/home/alex800121/haskell/aoc/2015/src/Day3.hs	1;"	m
 Day3	/home/alex800121/haskell/aoc/2016/src/Day3.hs	1;"	m
 Day3	/home/alex800121/haskell/aoc/2017/src/Day3.hs	1;"	m
+Day3	/home/alex800121/haskell/aoc/2018/src/Day3.hs	1;"	m
 Day3	/home/alex800121/haskell/aoc/2019/src/Day3.hs	1;"	m
 Day3	/home/alex800121/haskell/aoc/2020/src/Day3.hs	3;"	m
 Day3	/home/alex800121/haskell/aoc/2021/src/Day3.hs	1;"	m
@@ -294,6 +313,7 @@ Day3	/home/alex800121/haskell/aoc/2023/src/Day3.hs	1;"	m
 Day4	/home/alex800121/haskell/aoc/2015/src/Day4.hs	3;"	m
 Day4	/home/alex800121/haskell/aoc/2016/src/Day4.hs	1;"	m
 Day4	/home/alex800121/haskell/aoc/2017/src/Day4.hs	1;"	m
+Day4	/home/alex800121/haskell/aoc/2018/src/Day4.hs	1;"	m
 Day4	/home/alex800121/haskell/aoc/2019/src/Day4.hs	1;"	m
 Day4	/home/alex800121/haskell/aoc/2020/src/Day4.hs	1;"	m
 Day4	/home/alex800121/haskell/aoc/2021/src/Day4.hs	1;"	m
@@ -302,6 +322,7 @@ Day4	/home/alex800121/haskell/aoc/2023/src/Day4.hs	3;"	m
 Day5	/home/alex800121/haskell/aoc/2015/src/Day5.hs	1;"	m
 Day5	/home/alex800121/haskell/aoc/2016/src/Day5.hs	3;"	m
 Day5	/home/alex800121/haskell/aoc/2017/src/Day5.hs	1;"	m
+Day5	/home/alex800121/haskell/aoc/2018/src/Day5.hs	1;"	m
 Day5	/home/alex800121/haskell/aoc/2019/src/Day5.hs	1;"	m
 Day5	/home/alex800121/haskell/aoc/2020/src/Day5.hs	1;"	m
 Day5	/home/alex800121/haskell/aoc/2021/src/Day5.hs	1;"	m
@@ -310,6 +331,7 @@ Day5	/home/alex800121/haskell/aoc/2023/src/Day5.hs	1;"	m
 Day6	/home/alex800121/haskell/aoc/2015/src/Day6.hs	5;"	m
 Day6	/home/alex800121/haskell/aoc/2016/src/Day6.hs	1;"	m
 Day6	/home/alex800121/haskell/aoc/2017/src/Day6.hs	1;"	m
+Day6	/home/alex800121/haskell/aoc/2018/src/Day6.hs	1;"	m
 Day6	/home/alex800121/haskell/aoc/2019/src/Day6.hs	1;"	m
 Day6	/home/alex800121/haskell/aoc/2020/src/Day6.hs	1;"	m
 Day6	/home/alex800121/haskell/aoc/2021/src/Day6.hs	1;"	m
@@ -318,6 +340,7 @@ Day6	/home/alex800121/haskell/aoc/2023/src/Day6.hs	1;"	m
 Day7	/home/alex800121/haskell/aoc/2015/src/Day7.hs	1;"	m
 Day7	/home/alex800121/haskell/aoc/2016/src/Day7.hs	1;"	m
 Day7	/home/alex800121/haskell/aoc/2017/src/Day7.hs	1;"	m
+Day7	/home/alex800121/haskell/aoc/2018/src/Day7.hs	1;"	m
 Day7	/home/alex800121/haskell/aoc/2019/src/Day7.hs	1;"	m
 Day7	/home/alex800121/haskell/aoc/2020/src/Day7.hs	1;"	m
 Day7	/home/alex800121/haskell/aoc/2021/src/Day7.hs	1;"	m
@@ -326,6 +349,7 @@ Day7	/home/alex800121/haskell/aoc/2023/src/Day7.hs	1;"	m
 Day8	/home/alex800121/haskell/aoc/2015/src/Day8.hs	1;"	m
 Day8	/home/alex800121/haskell/aoc/2016/src/Day8.hs	1;"	m
 Day8	/home/alex800121/haskell/aoc/2017/src/Day8.hs	1;"	m
+Day8	/home/alex800121/haskell/aoc/2018/src/Day8.hs	1;"	m
 Day8	/home/alex800121/haskell/aoc/2019/src/Day8.hs	1;"	m
 Day8	/home/alex800121/haskell/aoc/2020/src/Day8.hs	1;"	m
 Day8	/home/alex800121/haskell/aoc/2021/src/Day8.hs	1;"	m
@@ -334,6 +358,7 @@ Day8	/home/alex800121/haskell/aoc/2023/src/Day8.hs	1;"	m
 Day9	/home/alex800121/haskell/aoc/2015/src/Day9.hs	1;"	m
 Day9	/home/alex800121/haskell/aoc/2016/src/Day9.hs	1;"	m
 Day9	/home/alex800121/haskell/aoc/2017/src/Day9.hs	1;"	m
+Day9	/home/alex800121/haskell/aoc/2018/src/Day9.hs	1;"	m
 Day9	/home/alex800121/haskell/aoc/2019/src/Day9.hs	1;"	m
 Day9	/home/alex800121/haskell/aoc/2020/src/Day9.hs	1;"	m
 Day9	/home/alex800121/haskell/aoc/2021/src/Day9.hs	3;"	m
@@ -1439,6 +1464,7 @@ datadir	/home/alex800121/haskell/aoc/dist-newstyle/build/x86_64-linux/ghc-9.6.5/
 day1	/home/alex800121/haskell/aoc/2015/src/Day1.hs	6;"	f
 day1	/home/alex800121/haskell/aoc/2016/src/Day1.hs	39;"	f
 day1	/home/alex800121/haskell/aoc/2017/src/Day1.hs	16;"	f
+day1	/home/alex800121/haskell/aoc/2018/src/Day1.hs	5;"	f
 day1	/home/alex800121/haskell/aoc/2019/src/Day1.hs	8;"	f
 day1	/home/alex800121/haskell/aoc/2020/src/Day1.hs	17;"	f
 day1	/home/alex800121/haskell/aoc/2021/src/Day1.hs	15;"	f
@@ -1447,6 +1473,7 @@ day1	/home/alex800121/haskell/aoc/2023/src/Day1.hs	20;"	f
 day10	/home/alex800121/haskell/aoc/2015/src/Day10.hs	11;"	f
 day10	/home/alex800121/haskell/aoc/2016/src/Day10.hs	52;"	f
 day10	/home/alex800121/haskell/aoc/2017/src/Day10.hs	28;"	f
+day10	/home/alex800121/haskell/aoc/2018/src/Day10.hs	5;"	f
 day10	/home/alex800121/haskell/aoc/2019/src/Day10.hs	60;"	f
 day10	/home/alex800121/haskell/aoc/2020/src/Day10.hs	9;"	f
 day10	/home/alex800121/haskell/aoc/2021/src/Day10.hs	34;"	f
@@ -1456,6 +1483,7 @@ day10a	/home/alex800121/haskell/aoc/2022/src/Day10.hs	19;"	f
 day11	/home/alex800121/haskell/aoc/2015/src/Day11.hs	43;"	f
 day11	/home/alex800121/haskell/aoc/2016/src/Day11.hs	185;"	f
 day11	/home/alex800121/haskell/aoc/2017/src/Day11.hs	39;"	f
+day11	/home/alex800121/haskell/aoc/2018/src/Day11.hs	5;"	f
 day11	/home/alex800121/haskell/aoc/2019/src/Day11.hs	38;"	f
 day11	/home/alex800121/haskell/aoc/2020/src/Day11.hs	46;"	f
 day11	/home/alex800121/haskell/aoc/2021/src/Day11.hs	45;"	f
@@ -1464,6 +1492,7 @@ day11	/home/alex800121/haskell/aoc/2023/src/Day11.hs	20;"	f
 day12	/home/alex800121/haskell/aoc/2015/src/Day12.hs	39;"	f
 day12	/home/alex800121/haskell/aoc/2016/src/Day12.hs	48;"	f
 day12	/home/alex800121/haskell/aoc/2017/src/Day12.hs	39;"	f
+day12	/home/alex800121/haskell/aoc/2018/src/Day12.hs	5;"	f
 day12	/home/alex800121/haskell/aoc/2019/src/Day12.hs	72;"	f
 day12	/home/alex800121/haskell/aoc/2020/src/Day12.hs	95;"	f
 day12	/home/alex800121/haskell/aoc/2021/src/Day12.hs	42;"	f
@@ -1474,6 +1503,7 @@ day12b	/home/alex800121/haskell/aoc/2019/src/Day12.hs	65;"	f
 day13	/home/alex800121/haskell/aoc/2015/src/Day13.hs	27;"	f
 day13	/home/alex800121/haskell/aoc/2016/src/Day13.hs	35;"	f
 day13	/home/alex800121/haskell/aoc/2017/src/Day13.hs	10;"	f
+day13	/home/alex800121/haskell/aoc/2018/src/Day13.hs	5;"	f
 day13	/home/alex800121/haskell/aoc/2019/src/Day13.hs	80;"	f
 day13	/home/alex800121/haskell/aoc/2020/src/Day13.hs	28;"	f
 day13	/home/alex800121/haskell/aoc/2021/src/Day13.hs	34;"	f
@@ -1483,6 +1513,7 @@ day13a	/home/alex800121/haskell/aoc/2017/src/Day13.hs	8;"	f
 day14	/home/alex800121/haskell/aoc/2015/src/Day14.hs	26;"	f
 day14	/home/alex800121/haskell/aoc/2016/src/Day14.hs	48;"	f
 day14	/home/alex800121/haskell/aoc/2017/src/Day14.hs	37;"	f
+day14	/home/alex800121/haskell/aoc/2018/src/Day14.hs	5;"	f
 day14	/home/alex800121/haskell/aoc/2019/src/Day14.hs	82;"	f
 day14	/home/alex800121/haskell/aoc/2020/src/Day14.hs	99;"	f
 day14	/home/alex800121/haskell/aoc/2021/src/Day14.hs	42;"	f
@@ -1492,6 +1523,7 @@ day14a	/home/alex800121/haskell/aoc/2023/src/Day14.hs	16;"	f
 day15	/home/alex800121/haskell/aoc/2015/src/Day15.hs	24;"	f
 day15	/home/alex800121/haskell/aoc/2016/src/Day15.hs	47;"	f
 day15	/home/alex800121/haskell/aoc/2017/src/Day15.hs	37;"	f
+day15	/home/alex800121/haskell/aoc/2018/src/Day15.hs	5;"	f
 day15	/home/alex800121/haskell/aoc/2019/src/Day15.hs	80;"	f
 day15	/home/alex800121/haskell/aoc/2020/src/Day15.hs	59;"	f
 day15	/home/alex800121/haskell/aoc/2021/src/Day15.hs	77;"	f
@@ -1504,6 +1536,7 @@ day15b'	/home/alex800121/haskell/aoc/2020/src/Day15.hs	47;"	f
 day16	/home/alex800121/haskell/aoc/2015/src/Day16.hs	34;"	f
 day16	/home/alex800121/haskell/aoc/2016/src/Day16.hs	22;"	f
 day16	/home/alex800121/haskell/aoc/2017/src/Day16.hs	44;"	f
+day16	/home/alex800121/haskell/aoc/2018/src/Day16.hs	5;"	f
 day16	/home/alex800121/haskell/aoc/2019/src/Day16.hs	18;"	f
 day16	/home/alex800121/haskell/aoc/2020/src/Day16.hs	63;"	f
 day16	/home/alex800121/haskell/aoc/2021/src/Day16.hs	65;"	f
@@ -1513,6 +1546,7 @@ day16b	/home/alex800121/haskell/aoc/2023/src/Day16.hs	50;"	f
 day17	/home/alex800121/haskell/aoc/2015/src/Day17.hs	19;"	f
 day17	/home/alex800121/haskell/aoc/2016/src/Day17.hs	64;"	f
 day17	/home/alex800121/haskell/aoc/2017/src/Day17.hs	30;"	f
+day17	/home/alex800121/haskell/aoc/2018/src/Day17.hs	5;"	f
 day17	/home/alex800121/haskell/aoc/2019/src/Day17.hs	97;"	f
 day17	/home/alex800121/haskell/aoc/2020/src/Day17.hs	80;"	f
 day17	/home/alex800121/haskell/aoc/2021/src/Day17.hs	25;"	f
@@ -1522,6 +1556,7 @@ day17b	/home/alex800121/haskell/aoc/2017/src/Day17.hs	21;"	f
 day18	/home/alex800121/haskell/aoc/2015/src/Day18.hs	61;"	f
 day18	/home/alex800121/haskell/aoc/2016/src/Day18.hs	24;"	f
 day18	/home/alex800121/haskell/aoc/2017/src/Day18.hs	96;"	f
+day18	/home/alex800121/haskell/aoc/2018/src/Day18.hs	5;"	f
 day18	/home/alex800121/haskell/aoc/2019/src/Day18.hs	163;"	f
 day18	/home/alex800121/haskell/aoc/2020/src/Day18.hs	53;"	f
 day18	/home/alex800121/haskell/aoc/2021/src/Day18.hs	57;"	f
@@ -1530,6 +1565,7 @@ day18	/home/alex800121/haskell/aoc/2023/src/Day18.hs	102;"	f
 day19	/home/alex800121/haskell/aoc/2015/src/Day19.hs	85;"	f
 day19	/home/alex800121/haskell/aoc/2016/src/Day19.hs	24;"	f
 day19	/home/alex800121/haskell/aoc/2017/src/Day19.hs	35;"	f
+day19	/home/alex800121/haskell/aoc/2018/src/Day19.hs	5;"	f
 day19	/home/alex800121/haskell/aoc/2019/src/Day19.hs	31;"	f
 day19	/home/alex800121/haskell/aoc/2020/src/Day19.hs	63;"	f
 day19	/home/alex800121/haskell/aoc/2021/src/Day19.hs	74;"	f
@@ -1548,6 +1584,7 @@ day1b	/home/alex800121/haskell/aoc/2017/src/Day1.hs	12;"	f
 day2	/home/alex800121/haskell/aoc/2015/src/Day2.hs	8;"	f
 day2	/home/alex800121/haskell/aoc/2016/src/Day2.hs	56;"	f
 day2	/home/alex800121/haskell/aoc/2017/src/Day2.hs	13;"	f
+day2	/home/alex800121/haskell/aoc/2018/src/Day2.hs	5;"	f
 day2	/home/alex800121/haskell/aoc/2019/src/Day2.hs	18;"	f
 day2	/home/alex800121/haskell/aoc/2020/src/Day2.hs	33;"	f
 day2	/home/alex800121/haskell/aoc/2021/src/Day2.hs	33;"	f
@@ -1556,6 +1593,7 @@ day2	/home/alex800121/haskell/aoc/2023/src/Day2.hs	49;"	f
 day20	/home/alex800121/haskell/aoc/2015/src/Day20.hs	14;"	f
 day20	/home/alex800121/haskell/aoc/2016/src/Day20.hs	33;"	f
 day20	/home/alex800121/haskell/aoc/2017/src/Day20.hs	92;"	f
+day20	/home/alex800121/haskell/aoc/2018/src/Day20.hs	5;"	f
 day20	/home/alex800121/haskell/aoc/2019/src/Day20.hs	141;"	f
 day20	/home/alex800121/haskell/aoc/2020/src/Day20.hs	234;"	f
 day20	/home/alex800121/haskell/aoc/2021/src/Day20.hs	67;"	f
@@ -1565,6 +1603,7 @@ day20b	/home/alex800121/haskell/aoc/2017/src/Day20.hs	72;"	f
 day21	/home/alex800121/haskell/aoc/2015/src/Day21.hs	46;"	f
 day21	/home/alex800121/haskell/aoc/2016/src/Day21.hs	67;"	f
 day21	/home/alex800121/haskell/aoc/2017/src/Day21.hs	157;"	f
+day21	/home/alex800121/haskell/aoc/2018/src/Day21.hs	5;"	f
 day21	/home/alex800121/haskell/aoc/2019/src/Day21.hs	71;"	f
 day21	/home/alex800121/haskell/aoc/2020/src/Day21.hs	56;"	f
 day21	/home/alex800121/haskell/aoc/2021/src/Day21.hs	60;"	f
@@ -1576,6 +1615,7 @@ day21bParser	/home/alex800121/haskell/aoc/2022/src/Day21.hs	84;"	f
 day22	/home/alex800121/haskell/aoc/2015/src/Day22.hs	134;"	f
 day22	/home/alex800121/haskell/aoc/2016/src/Day22.hs	56;"	f
 day22	/home/alex800121/haskell/aoc/2017/src/Day22.hs	47;"	f
+day22	/home/alex800121/haskell/aoc/2018/src/Day22.hs	5;"	f
 day22	/home/alex800121/haskell/aoc/2019/src/Day22.hs	75;"	f
 day22	/home/alex800121/haskell/aoc/2020/src/Day22.hs	46;"	f
 day22	/home/alex800121/haskell/aoc/2021/src/Day22.hs	35;"	f
@@ -1586,6 +1626,7 @@ day22b	/home/alex800121/haskell/aoc/2020/src/Day22.hs	27;"	f
 day23	/home/alex800121/haskell/aoc/2015/src/Day23.hs	30;"	f
 day23	/home/alex800121/haskell/aoc/2016/src/Day23.hs	66;"	f
 day23	/home/alex800121/haskell/aoc/2017/src/Day23.hs	84;"	f
+day23	/home/alex800121/haskell/aoc/2018/src/Day23.hs	5;"	f
 day23	/home/alex800121/haskell/aoc/2019/src/Day23.hs	79;"	f
 day23	/home/alex800121/haskell/aoc/2020/src/Day23.hs	70;"	f
 day23	/home/alex800121/haskell/aoc/2021/src/Day23.hs	147;"	f
@@ -1596,6 +1637,7 @@ day23b	/home/alex800121/haskell/aoc/2019/src/Day23.hs	65;"	f
 day24	/home/alex800121/haskell/aoc/2015/src/Day24.hs	23;"	f
 day24	/home/alex800121/haskell/aoc/2016/src/Day24.hs	54;"	f
 day24	/home/alex800121/haskell/aoc/2017/src/Day24.hs	30;"	f
+day24	/home/alex800121/haskell/aoc/2018/src/Day24.hs	5;"	f
 day24	/home/alex800121/haskell/aoc/2019/src/Day24.hs	122;"	f
 day24	/home/alex800121/haskell/aoc/2020/src/Day24.hs	58;"	f
 day24	/home/alex800121/haskell/aoc/2021/src/Day24'.hs	166;"	f
@@ -1606,6 +1648,7 @@ day24b	/home/alex800121/haskell/aoc/2023/src/Day24.hs	47;"	f
 day25	/home/alex800121/haskell/aoc/2015/src/Day25.hs	12;"	f
 day25	/home/alex800121/haskell/aoc/2016/src/Day25.hs	12;"	f
 day25	/home/alex800121/haskell/aoc/2017/src/Day25.hs	122;"	f
+day25	/home/alex800121/haskell/aoc/2018/src/Day25.hs	5;"	f
 day25	/home/alex800121/haskell/aoc/2019/src/Day25.hs	101;"	f
 day25	/home/alex800121/haskell/aoc/2020/src/Day25.hs	31;"	f
 day25	/home/alex800121/haskell/aoc/2021/src/Day25.hs	50;"	f
@@ -1618,6 +1661,7 @@ day2b	/home/alex800121/haskell/aoc/2023/src/Day2.hs	46;"	f
 day3	/home/alex800121/haskell/aoc/2015/src/Day3.hs	19;"	f
 day3	/home/alex800121/haskell/aoc/2016/src/Day3.hs	6;"	f
 day3	/home/alex800121/haskell/aoc/2017/src/Day3.hs	40;"	f
+day3	/home/alex800121/haskell/aoc/2018/src/Day3.hs	5;"	f
 day3	/home/alex800121/haskell/aoc/2019/src/Day3.hs	45;"	f
 day3	/home/alex800121/haskell/aoc/2020/src/Day3.hs	31;"	f
 day3	/home/alex800121/haskell/aoc/2021/src/Day3.hs	21;"	f
@@ -1628,6 +1672,7 @@ day3b	/home/alex800121/haskell/aoc/2017/src/Day3.hs	33;"	f
 day4	/home/alex800121/haskell/aoc/2015/src/Day4.hs	24;"	f
 day4	/home/alex800121/haskell/aoc/2016/src/Day4.hs	30;"	f
 day4	/home/alex800121/haskell/aoc/2017/src/Day4.hs	6;"	f
+day4	/home/alex800121/haskell/aoc/2018/src/Day4.hs	5;"	f
 day4	/home/alex800121/haskell/aoc/2019/src/Day4.hs	21;"	f
 day4	/home/alex800121/haskell/aoc/2020/src/Day4.hs	66;"	f
 day4	/home/alex800121/haskell/aoc/2021/src/Day4.hs	33;"	f
@@ -1638,6 +1683,7 @@ day4b	/home/alex800121/haskell/aoc/2023/src/Day4.hs	33;"	f
 day5	/home/alex800121/haskell/aoc/2015/src/Day5.hs	22;"	f
 day5	/home/alex800121/haskell/aoc/2016/src/Day5.hs	41;"	f
 day5	/home/alex800121/haskell/aoc/2017/src/Day5.hs	18;"	f
+day5	/home/alex800121/haskell/aoc/2018/src/Day5.hs	5;"	f
 day5	/home/alex800121/haskell/aoc/2019/src/Day5.hs	15;"	f
 day5	/home/alex800121/haskell/aoc/2020/src/Day5.hs	6;"	f
 day5	/home/alex800121/haskell/aoc/2021/src/Day5.hs	23;"	f
@@ -1646,6 +1692,7 @@ day5	/home/alex800121/haskell/aoc/2023/src/Day5.hs	34;"	f
 day6	/home/alex800121/haskell/aoc/2015/src/Day6.hs	63;"	f
 day6	/home/alex800121/haskell/aoc/2016/src/Day6.hs	6;"	f
 day6	/home/alex800121/haskell/aoc/2017/src/Day6.hs	24;"	f
+day6	/home/alex800121/haskell/aoc/2018/src/Day6.hs	5;"	f
 day6	/home/alex800121/haskell/aoc/2019/src/Day6.hs	55;"	f
 day6	/home/alex800121/haskell/aoc/2020/src/Day6.hs	10;"	f
 day6	/home/alex800121/haskell/aoc/2021/src/Day6.hs	13;"	f
@@ -1657,6 +1704,7 @@ day6b	/home/alex800121/haskell/aoc/2019/src/Day6.hs	50;"	f
 day7	/home/alex800121/haskell/aoc/2015/src/Day7.hs	55;"	f
 day7	/home/alex800121/haskell/aoc/2016/src/Day7.hs	34;"	f
 day7	/home/alex800121/haskell/aoc/2017/src/Day7.hs	60;"	f
+day7	/home/alex800121/haskell/aoc/2018/src/Day7.hs	5;"	f
 day7	/home/alex800121/haskell/aoc/2019/src/Day7.hs	29;"	f
 day7	/home/alex800121/haskell/aoc/2020/src/Day7.hs	61;"	f
 day7	/home/alex800121/haskell/aoc/2021/src/Day7.hs	7;"	f
@@ -1667,6 +1715,7 @@ day7b	/home/alex800121/haskell/aoc/2019/src/Day7.hs	19;"	f
 day8	/home/alex800121/haskell/aoc/2015/src/Day8.hs	28;"	f
 day8	/home/alex800121/haskell/aoc/2016/src/Day8.hs	42;"	f
 day8	/home/alex800121/haskell/aoc/2017/src/Day8.hs	30;"	f
+day8	/home/alex800121/haskell/aoc/2018/src/Day8.hs	5;"	f
 day8	/home/alex800121/haskell/aoc/2019/src/Day8.hs	15;"	f
 day8	/home/alex800121/haskell/aoc/2020/src/Day8.hs	57;"	f
 day8	/home/alex800121/haskell/aoc/2021/src/Day8.hs	37;"	f
@@ -1676,6 +1725,7 @@ day8a	/home/alex800121/haskell/aoc/2023/src/Day8.hs	19;"	f
 day9	/home/alex800121/haskell/aoc/2015/src/Day9.hs	27;"	f
 day9	/home/alex800121/haskell/aoc/2016/src/Day9.hs	37;"	f
 day9	/home/alex800121/haskell/aoc/2017/src/Day9.hs	44;"	f
+day9	/home/alex800121/haskell/aoc/2018/src/Day9.hs	5;"	f
 day9	/home/alex800121/haskell/aoc/2019/src/Day9.hs	13;"	f
 day9	/home/alex800121/haskell/aoc/2020/src/Day9.hs	26;"	f
 day9	/home/alex800121/haskell/aoc/2021/src/Day9.hs	76;"	f
