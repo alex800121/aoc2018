@@ -5,6 +5,7 @@
 
 module Day15 where
 
+import Paths_AOC2018
 import Control.Lens (over, set, view)
 import Control.Lens.At (Ixed (..))
 import Control.Lens.Indexed
@@ -172,7 +173,7 @@ attack g u
 outcome = (*) <$> _roundN <*> sum . map _hp . Set.toList . _units
 day15 :: IO ()
 day15 = do
-  input <- drawArray @Array . lines <$> readFile "input/input15.txt"
+  input <- drawArray @Array . lines <$> (getDataDir >>= readFile . (++ "/input/input15.txt"))
   -- input <- drawArray @Array . lines <$> readFile "input/test15.txt"
   let g = readInput 200 3 3 input
       elves = length $ Set.filter ((== Elf) . _species) $ _units g

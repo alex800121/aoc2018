@@ -2,6 +2,7 @@
 
 module Day8 where
 
+import Paths_AOC2018
 import Data.Maybe (fromJust, mapMaybe)
 import MyLib hiding (Tree)
 import Text.Megaparsec
@@ -31,7 +32,7 @@ calcNode (Tree c m)
 
 day8 :: IO ()
 day8 = do
-  input <- fromJust . parseMaybe parseTree <$> readFile "input/input8.txt"
+  input <- fromJust . parseMaybe parseTree <$> (getDataDir >>= readFile . (++ "/input/input8.txt"))
   -- input <- fromJust . parseMaybe parseTree <$> readFile "input/test8.txt"
   print $ sum input
   print $ calcNode input

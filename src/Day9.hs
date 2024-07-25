@@ -1,5 +1,6 @@
 module Day9 where
 
+import Paths_AOC2018
 import Control.Monad.ST.Strict
 import Data.Bifunctor (Bifunctor (..))
 import Data.List (transpose, unfoldr)

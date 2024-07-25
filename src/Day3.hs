@@ -1,5 +1,6 @@
 module Day3 where
 
+import Paths_AOC2018
 import Data.Maybe (fromJust, mapMaybe)
 import Data.Set (Set)
 import qualified Data.Set as Set
@@ -46,7 +47,7 @@ calcArea' (Cons (a, b) (Cons (c, d) Nil)) = Set.fromList [(x, y) | x <- [a .. b 
 
 day3 :: IO ()
 day3 = do
-  input <- map (fromJust . parseMaybe inputParser) . lines <$> readFile "input/input3.txt"
+  input <- map (fromJust . parseMaybe inputParser) . lines <$> (getDataDir >>= readFile . (++ "/input/input3.txt"))
   let (a, b) = calcOverlap input
   print $ length $ Set.unions $ map calcArea' b
   print a

@@ -2,6 +2,7 @@
 
 module Day22 where
 
+import Paths_AOC2018
 import Data.Array
 import Data.Array.IArray (amap)
 import Data.Bifunctor (Bifunctor (..))
