@@ -75,7 +75,8 @@ library
         Day22,
         Day23,
         Day24,
-        Day25
+        Day25,
+        Main
 
     -- Modules included in this library but not exported.
     other-modules:
