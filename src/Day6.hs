@@ -1,4 +1,3 @@
-{-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE BangPatterns #-}
 
 module Day6 where
@@ -20,6 +19,7 @@ import qualified Data.Set as Set
 import Data.Tuple (swap)
 import MyLib (drawGraph, stablizedBy)
 import Paths_AOC2018
+import Data.Either (fromRight)
 
 type Index = (Int, Int)
 
@@ -35,8 +35,7 @@ adjacent = [(0, 1), (1, 0), (0, -1), (-1, 0)]
 calcBounds =
   ( ( minimum &&& maximum
     )
-      *** ( minimum &&& maximum
-          )
+      *** minimum &&& maximum
   )
     . unzip
     . map fst
@@ -44,20 +43,18 @@ calcBounds =
 manhattan (x, y) = uncurry (+) . (abs . subtract x *** abs . subtract y)
 
 calcDist :: Index -> [(Index, Int)] -> (Int, Int)
-calcDist x = go (Right (0, maxBound)) 0
+calcDist x = first (const 0 ||| fst) .  foldl' go (Right (0, maxBound), 0)
   where
-    go (Right (i, d)) s [] = (i, s)
-    go (Left _) s [] = (0, s)
-    go r@(Right (i, d)) s ((y, n) : xs)
-      | d > d' = go (Right (n, d')) s' xs
-      | d == d' = go (Left d) s' xs
-      | otherwise = go r s' xs
+    go (r@(Right (i, d)), s) (y, n)
+      | d > d' = (Right (n, d'), s')
+      | d == d' = (Left d, s')
+      | otherwise = (r, s')
       where
         !s' = s + d'
         !d' = manhattan x y
-    go l@(Left d) s ((y, n) : xs)
-      | d > d' = go (Right (n, d')) s' xs
-      | otherwise = go l s' xs
+    go (l@(Left d), s) (y, n)
+      | d > d' = (Right (n, d'), s')
+      | otherwise = (l, s')
       where
         !s' = s + d'
         !d' = manhattan x y
@@ -68,23 +65,18 @@ calcPoints ((minX, maxX), (minY, maxY)) limit ref =
     foldl'
       f
       ((IM.empty, 0), Set.empty)
-      [ (n, (x, y))
+      [ (x, y)
         | x <- [minX .. maxX],
-          y <- [minY .. maxY],
-          -- let n = calcDist (x, y) ref
-          let dist = sort $ map (first (manhattan (x, y))) ref,
-          let !sumD = sum $ map fst dist,
-          let n = case dist of
-                ((x, n) : (y, _) : _) | x /= y -> (n, sumD)
-                _ -> (0, sumD)
+          y <- [minY .. maxY]
       ]
   where
-    f ((acc, acc'), wrong) ((n, d), (x, y))
+    f ((!acc, !acc'), !wrong) (x, y)
       | n `Set.member` wrong = ((acc, acc''), wrong)
       | x `elem` [minX, minY] || y `elem` [maxX, maxY] = ((IM.delete n acc, acc''), Set.insert n wrong)
       | otherwise = ((IM.insertWith (+) n 1 acc, acc''), wrong)
       where
-        !acc'' = if d < limit then acc' + 1 else acc'
+        (!n, !d) = calcDist (x, y) ref
+        !acc'' = if d < limit then 1 + acc' else acc'
 
 day6 :: IO ()
 day6 = do
