@@ -25,6 +25,7 @@ common shared
     default-language: Haskell2010
     build-depends:
         base >= 4.18,
+        data-clist,
         megaparsec,
         parser-combinators,
         transformers,
