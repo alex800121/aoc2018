@@ -55,6 +55,6 @@ day7 = do
     . ("day7a: " ++)
     $ map (chr . (+ ord 'A') . subtract 1) s
   putStrLn
-    . ("day7a: " ++)
+    . ("day7b: " ++)
     . show
     $ calcTime 5 60 input
