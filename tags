@@ -478,7 +478,6 @@ Full	/home/alex800121/haskell/aoc/2016/src/Day22.hs	17;"	C
 G	/home/alex800121/haskell/aoc/2023/src/Day25.hs	17;"	t
 G	/home/alex800121/haskell/aoc/2015/src/Day22.hs	31;"	C
 G	/home/alex800121/haskell/aoc/2017/src/Day25.hs	56;"	C
-G	/home/alex800121/haskell/aoc/2018/src/Day9.hs	9;"	C
 G	/home/alex800121/haskell/aoc/2019/src/Day11.hs	19;"	C
 G	/home/alex800121/haskell/aoc/2019/src/Day18.hs	64;"	C
 G	/home/alex800121/haskell/aoc/2019/src/Day21.hs	32;"	C
@@ -495,7 +494,6 @@ GameState	/home/alex800121/haskell/aoc/2016/src/Day11.hs	28;"	t
 GameState	/home/alex800121/haskell/aoc/2016/src/Day12.hs	20;"	t
 GameState	/home/alex800121/haskell/aoc/2016/src/Day23.hs	23;"	t
 GameState	/home/alex800121/haskell/aoc/2017/src/Day25.hs	56;"	t
-GameState	/home/alex800121/haskell/aoc/2018/src/Day9.hs	9;"	t
 GameState	/home/alex800121/haskell/aoc/2019/src/Day11.hs	19;"	t
 GameState	/home/alex800121/haskell/aoc/2019/src/Day18.hs	64;"	t
 GameState	/home/alex800121/haskell/aoc/2019/src/Day23.hs	23;"	t
@@ -1257,7 +1255,6 @@ _children	/home/alex800121/haskell/aoc/AOC/src/MyLib2015.hs	53;"	f
 _children	/home/alex800121/haskell/aoc/AOC/src/MyLib2016.hs	68;"	f
 _children	/home/alex800121/haskell/aoc/AOC/src/MyLib2017.hs	54;"	f
 _chips	/home/alex800121/haskell/aoc/2016/src/Day10.hs	17;"	f
-_clist	/home/alex800121/haskell/aoc/2018/src/Day9.hs	10;"	f
 _content	/home/alex800121/haskell/aoc/2015/src/Day19.hs	44;"	f
 _contentf	/home/alex800121/haskell/aoc/2015/src/Day19.hs	35;"	f
 _damage	/home/alex800121/haskell/aoc/2015/src/Day21.hs	28;"	f
@@ -1334,7 +1331,6 @@ _positions	/home/alex800121/haskell/aoc/2016/src/Day15.hs	11;"	f
 _pw	/home/alex800121/haskell/aoc/2015/src/Day11.hs	10;"	f
 _right	/home/alex800121/haskell/aoc/2017/src/Day25.hs	24;"	f
 _role	/home/alex800121/haskell/aoc/2015/src/Day21.hs	26;"	f
-_score	/home/alex800121/haskell/aoc/2018/src/Day9.hs	11;"	f
 _south	/home/alex800121/haskell/aoc/2021/src/Day25.hs	16;"	f
 _st	/home/alex800121/haskell/aoc/2015/src/Day19.hs	43;"	f
 _state	/home/alex800121/haskell/aoc/2017/src/Day25.hs	57;"	f
@@ -1993,7 +1989,7 @@ day8a	/home/alex800121/haskell/aoc/2023/src/Day8.hs	19;"	f
 day9	/home/alex800121/haskell/aoc/2015/src/Day9.hs	26;"	f
 day9	/home/alex800121/haskell/aoc/2016/src/Day9.hs	36;"	f
 day9	/home/alex800121/haskell/aoc/2017/src/Day9.hs	44;"	f
-day9	/home/alex800121/haskell/aoc/2018/src/Day9.hs	16;"	f
+day9	/home/alex800121/haskell/aoc/2018/src/Day9.hs	33;"	f
 day9	/home/alex800121/haskell/aoc/2019/src/Day9.hs	13;"	f
 day9	/home/alex800121/haskell/aoc/2020/src/Day9.hs	26;"	f
 day9	/home/alex800121/haskell/aoc/2021/src/Day9.hs	76;"	f
@@ -2897,6 +2893,7 @@ l	/home/alex800121/haskell/aoc/2016/src/Day16.hs	7;"	f
 l	/home/alex800121/haskell/aoc/2019/src/Day17.hs	35;"	f
 l'	/home/alex800121/haskell/aoc/2016/src/Day16.hs	8;"	f
 lastBingo	/home/alex800121/haskell/aoc/2021/src/Day4.hs	24;"	f
+lastMarble	/home/alex800121/haskell/aoc/2018/src/Day9.hs	17;"	f
 libdir	/home/alex800121/haskell/aoc/dist-newstyle/build/aarch64-linux/ghc-9.6.5/AOC-0.1.0.0/build/autogen/Paths_AOC.hs	48;"	f
 libdir	/home/alex800121/haskell/aoc/dist-newstyle/build/aarch64-linux/ghc-9.6.5/AOC-0.1.0.0/opt/build/autogen/Paths_AOC.hs	48;"	f
 libdir	/home/alex800121/haskell/aoc/dist-newstyle/build/aarch64-linux/ghc-9.6.5/AOC2017-0.1.0.0/build/autogen/Paths_AOC2017.hs	48;"	f
@@ -3279,6 +3276,7 @@ pid	/home/alex800121/haskell/aoc/2020/src/Day4.hs	33;"	f
 pipeGroups	/home/alex800121/haskell/aoc/2017/src/Day12.hs	31;"	f
 planeToInitCube	/home/alex800121/haskell/aoc/2022/src/Day22.hs	87;"	f
 play	/home/alex800121/haskell/aoc/2015/src/Day21.hs	36;"	f
+playGame	/home/alex800121/haskell/aoc/2018/src/Day9.hs	19;"	f
 playGame	/home/alex800121/haskell/aoc/2019/src/Day25.hs	83;"	f
 playGame	/home/alex800121/haskell/aoc/2021/src/Day21.hs	32;"	f
 player1	/home/alex800121/haskell/aoc/2021/src/Day21.hs	12;"	f
@@ -3287,6 +3285,7 @@ player1Score	/home/alex800121/haskell/aoc/2021/src/Day21.hs	24;"	f
 player2	/home/alex800121/haskell/aoc/2021/src/Day21.hs	14;"	f
 player2Place	/home/alex800121/haskell/aoc/2021/src/Day21.hs	25;"	f
 player2Score	/home/alex800121/haskell/aoc/2021/src/Day21.hs	26;"	f
+playerN	/home/alex800121/haskell/aoc/2018/src/Day9.hs	15;"	f
 playerScore	/home/alex800121/haskell/aoc/2022/src/Day2.hs	32;"	f
 postFixHash	/home/alex800121/haskell/aoc/2016/src/Day5.hs	17;"	f
 prefix5	/home/alex800121/haskell/aoc/2015/src/Day4.hs	16;"	f
