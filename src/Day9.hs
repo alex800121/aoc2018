@@ -1,108 +1,53 @@
 module Day9 where
 
-import Paths_AOC2018
-import Control.Monad.ST.Strict
-import Data.Bifunctor (Bifunctor (..))
-import Data.List (transpose, unfoldr)
-import Data.List.Split (chunksOf)
-import Data.Sequence (Seq (..))
-import qualified Data.Sequence as S
-import qualified Data.Vector.Unboxed as U
-import qualified Data.Vector.Unboxed.Mutable as M
-import Debug.Trace
+import Control.Monad (foldM_)
+import Control.Monad.ST.Strict (ST, runST)
+import Data.Foldable (foldlM)
+import Data.Maybe (mapMaybe)
+import Data.Vector.Unboxed qualified as V
+import Data.Vector.Unboxed.Mutable (STVector)
+import Data.Vector.Unboxed.Mutable qualified as MV
+import Debug.Trace (traceM)
+import Paths_AOC2018 (getDataDir)
+import Text.Read (readMaybe)
 
-player = 452
-
-marble = 70784
-
--- player = 10; marble = 1618
--- player = 13; marble = 7999
--- player = 17; marble = 1104
--- player = 21; marble = 6111
--- player = 30; marble = 5807
-
-type Chain = (Int, Seq Int)
-
-type Chain' s = M.STVector s (Int, Int)
-
-type Score s = M.STVector s Int
-
-type GameState s = (Score s, Chain' s)
-
-run :: Int -> Int -> Int -> Int -> Int -> GameState s -> ST s ()
-run limit players currentMarble currentPlayer currentPos g@(score, vec)
-  -- | traceShow (currentPlayer, currentMarble, currentPos) False = undefined
-  | currentMarble > limit = return ()
-  | currentMarble `mod` 23 == 0 = do
-      removed <- backward 7 currentPos vec
-      next <- deleteChain removed vec
-      M.modify score (+ (removed + currentMarble)) currentPlayer
-      run limit players nextMarble nextPlayer next (score, vec)
-  | otherwise = do
-      next <- snd <$> M.read vec currentPos
-      insertChain currentMarble next vec
-      run limit players nextMarble nextPlayer currentMarble (score, vec)
+play players lastMarble = runST $ do
+  v <- MV.new needed
+  score <- MV.replicate players (0 :: Int)
+  MV.write v 0 (0 :: Int)
+  foldM_ (go v score) (0, 0) [0, 23 .. lastMarble - 23]
+  -- V.freeze score
+  MV.foldl' max 0 score
   where
-    nextPlayer = (currentPlayer + 1) `mod` players
-    nextMarble = currentMarble + 1
-
-forward, backward :: Int -> Int -> Chain' s -> ST s Int
-forward n pos c
-  | n == 0 = pure pos
-  | n > 0 = do
-      pos' <- snd <$> M.read c pos 
-      forward (n - 1) pos' c
-  | n < 0 = do
-      pos' <- fst <$> M.read c pos
-      forward (n + 1) pos' c
-backward n = forward (negate n)
-
-insertChain :: Int -> Int -> Chain' s -> ST s ()
-insertChain n pos c = do
-  next <- snd <$> M.read c pos
-  M.modify c (second (const n)) pos
-  M.modify c (first (const n)) next
-  M.write c n (pos, next)
-
-deleteChain :: Int -> Chain' s -> ST s Int
-deleteChain n c = do
-  (prev, next) <- M.read c n
-  M.modify c (second (const next)) prev
-  M.modify c (first (const prev)) next
-  return next
-
-run' limit players = runST $ do
-  score <- M.replicate players 0
-  vec <- M.new (limit + 1)
-  run limit players 1 0 0 (score, vec)
-  (,) <$> U.freeze score <*> U.freeze vec
-
-next :: Int -> (Int, Chain) -> Maybe (Int, (Int, Chain))
-next limit (n, (pos, c))
-  -- \| traceShow l False = undefined
-  | n > limit = Nothing
-  | n `mod` 23 == 0 = Just (score, (n + 1, ans0))
-  | otherwise = Just (0, (n + 1, ans1))
-  where
-    l = length c
-    score = n + c `S.index` pos7
-    pos7 = (pos - 7) `mod` l
-    ans0 = (pos7, S.deleteAt pos7 c)
-    pos' = (pos + 2) `mod` l
-    ans1 = (pos', S.insertAt pos' n c)
-
-reconstruct :: U.Vector (Int, Int) -> [Int]
-reconstruct = f 0
-  where
-    f n v
-      | next == 0 = [n]
-      | otherwise = n : f next v
+    rounds = lastMarble `div` 23
+    needed = 37 * rounds + 2
+    go :: STVector s Int -> STVector s Int -> (Int, Int) -> Int -> ST s (Int, Int)
+    go v score (h, t) x = do
+      mapM_ (f v) [1 .. 18]
+      n <- MV.read v (t + 18)
+      MV.modify score (+ (n + x + 23)) ((x + 23) `mod` players)
+      MV.write v (h + 37) (x + 19)
+      mapM_ (g v) [0 .. 2]
+      pure (h + 37, t + 16)
       where
-        next = snd $ v U.! n
+        f v y =
+          MV.read v (t + y - 1)
+            >>= MV.write v (h + y * 2 - 1)
+            >> MV.write v (h + 2 * y) (x + y)
+        g v n =
+          MV.read v (t + 19 + n)
+            >>= MV.write v (t + 16 + n * 2)
+            >> MV.write v (t + 17 + n * 2) (x + 20 + n)
 
-day9 :: IO ()
+day9 :: IO (String, String)
 day9 = do
-  -- print $ maximum $ map sum $ transpose $ chunksOf player $ unfoldr (next marble) (1, (0, S.singleton 0))
-  -- print $ maximum $ map sum $ transpose $ chunksOf player $ unfoldr (next (100 * marble)) (1, (0, S.singleton 0))
-  print $ U.maximum $ fst $ run' marble player
-  print $ U.maximum $ fst $ run' (marble * 100) player
+  [players, lastMarble] <- mapMaybe (readMaybe @Int) . words <$> (getDataDir >>= readFile . (++ "/input/input9.txt"))
+  let
+    !finalAnsa =
+      show $
+        play players lastMarble
+  let
+    !finalAnsb =
+      show $
+        play players (lastMarble * 100)
+  pure (finalAnsa, finalAnsb)

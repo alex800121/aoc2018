@@ -1,112 +1,73 @@
 module Day23 where
 
-import Paths_AOC2018
-import Data.Foldable (maximumBy)
 import Data.Function (on)
-import Data.IntMap (IntMap)
-import qualified Data.IntMap as IM
-import Data.Maybe (fromJust, mapMaybe)
-import Data.PQueue.Prio.Max (MaxPQueue (..))
-import qualified Data.PQueue.Prio.Max as P
-import Debug.Trace
-import MyLib (Nat (..), Parser, Vec (..), jointEucVecs, overlapEucVec, signedInteger, subtractEucVecs)
-import Text.Megaparsec
-import Text.Megaparsec.Char
-import Control.Monad (guard)
+import Data.List (foldl', maximumBy, nub)
+import Data.Maybe (mapMaybe)
+import Data.PQueue.Prio.Min (MinPQueue (..))
+import Data.PQueue.Prio.Min qualified as Q
+import MyLib (signedInteger)
+import Paths_AOC2018
+import Text.Megaparsec (parseMaybe)
+import Text.Megaparsec.Char (char, string)
 
-type Triple a = (a, a, a)
-
-type Index = Triple Int
-
-type Bot = (Index, Int)
-
-type Bot' = Vec S4 Range -- <xyz, -xyz, x-yz, xy-z>
-
-type Range = (Int, Int)
-
-type S4 = S (S (S (S Z)))
-
-convertBot :: Bot -> Bot'
-convertBot ((x, y, z), r) = Cons (b, a) $ Cons (d, c) $ Cons (f, e) $ Cons (h, g) Nil
-  where
-    xyz = x + y + z
-    x'yz = -x + y + z
-    xy'z = x - y + z
-    xyz' = x + y - z
-    a = xyz + r + 1
-    b = xyz - r
-    c = x'yz + r + 1
-    d = x'yz - r
-    e = xy'z + r + 1
-    f = xy'z - r
-    g = xyz' + r + 1
-    h = xyz' - r
-
-type Q = MaxPQueue Int Bot'
-
-toCenter :: Bot' -> Maybe Index
-toCenter (Cons (a, b) (Cons (c, d) (Cons (e, f) (Cons (g, h) Nil))))
-  | any (/= 1) [b - a, d - c, f - e, h - g] = Nothing
-  | otherwise = Just ((a - c) `div` 2, (a - e) `div` 2, (a - g) `div` 2)
-
-dijkstra :: [Bot'] -> Int -> IntMap Index -> Q -> IntMap Index
-dijkstra bots maxN acc q
-  | P.null q || i < maxN = acc
-  | Just c <- center = dijkstra bots (max i maxN) (IM.insertWith maxBy i c acc) xs
-  | otherwise = dijkstra bots maxN acc (P.union xs bot')
-  where
-    ((i, x), xs) = P.deleteFindMax q
-    center = toCenter x
-    maxBy a b = if manhattan (0, 0, 0) a > manhattan (0, 0, 0) b then a else b
-    bot' = P.fromList $ divideBot bots x
-
-divideBot :: [Bot'] -> Bot' -> [(Int, Bot')]
-divideBot bots bot@(Cons (a, b) (Cons (c, d) (Cons (e, f) (Cons (g, h) Nil)))) = do
-  x <- [(a, ab), (ab, b)]
-  y <- [(c, cd), (cd, d)]
-  z <- [(e, ef), (ef, f)]
-  w <- [(g, gh), (gh, h)]
-  guard $ uncurry (<) x
-  guard $ uncurry (<) y
-  guard $ uncurry (<) z
-  guard $ uncurry (<) w
-  let bot' = Cons x (Cons y (Cons z (Cons w Nil)))
-      n = length $ mapMaybe (overlapEucVec bot') bots
-  pure (n, bot')
-  where
-    (Cons ab (Cons cd (Cons ef (Cons gh Nil))))  = fmap (\(x, y) -> (x + y) `div` 2) bot
-
--- overlapBot :: [(Int, Bot')] -> IntMap [Bot']
--- overlapBot = foldr f IM.empty
---   where
---     f (i, x) acc | traceShow (fst <$> IM.maxViewWithKey acc, i) False = undefined
---     f (_, x) acc = IM.filter (not . null) sub
---       where
---         overlapped = IM.map (mapMaybe (overlapEucVec x)) acc
---         add = IM.unionWith (\x y -> (x <> y)) acc $ IM.insert 0 [x] $ IM.mapKeys (+ 1) overlapped
---         sub = IM.unionWith (flip subtractEucVecs) add overlapped
-
-parseBot :: Parser Bot
-parseBot = do
-  string "pos=<"
-  i <- (,,) <$> signedInteger <*> (char ',' >> signedInteger) <*> (char ',' >> signedInteger)
-  string ">, r="
-  r <- signedInteger
-  return (i, r)
-
-manhattan :: (Num a) => (a, a, a) -> (a, a, a) -> a
 manhattan (a, b, c) (d, e, f) = abs (a - d) + abs (b - e) + abs (c - f)
 
-inRange' :: Bot -> Bot -> Bool
-inRange' a b = manhattan (fst a) (fst b) <= snd a
+botParser = do
+  string "pos=<"
+  x <- signedInteger <* char ','
+  y <- signedInteger <* char ','
+  z <- signedInteger <* string ">, r="
+  r <- signedInteger
+  pure ((x, y, z), r)
 
-day23 :: IO ()
+day23a l = length $ filter (\(a, _) -> manhattan x a <= d) l
+  where
+    (x, d) = maximumBy (compare `on` snd) l
+
+type Hue = (Int, Int, Int)
+
+split ((x0, y0, z0), (x1, y1, z1)) =
+  nub
+    [ ((a, b, c), (d, e, f))
+    | (a, d) <- [(x0, cx), (cx + 1, x1)]
+    , (b, e) <- [(y0, cy), (cy + 1, y1)]
+    , (c, f) <- [(z0, cz), (cz + 1, z1)]
+    ]
+  where
+    cx = (x0 + x1) `div` 2
+    cy = (y0 + y1) `div` 2
+    cz = (z0 + z1) `div` 2
+
+size ((x0, y0, z0), (x1, y1, z1)) = (x1 - x0 + 1) * (y1 - y0 + 1) * (z1 - z0 + 1)
+
+dist ((x0, y0, z0), (x1, y1, z1)) (a, b, c) = x + y + z
+  where
+    x = max 0 (x0 - a) + max 0 (a - x1)
+    y = max 0 (y0 - b) + max 0 (b - y1)
+    z = max 0 (z0 - c) + max 0 (c - z1)
+
+inRange a (b, r) = dist a b <= r
+
+day23b l = go (Q.singleton (hue l x0) (x0, l))
+  where
+    x0 = foldl' f ((maxBound, maxBound, maxBound), (minBound, minBound, minBound)) l
+    f ((a, b, c), (d, e, f)) ((x, y, z), _) = ((min a x, min b y, min c z), (max a x, max b y, max c z))
+    go Empty = Nothing
+    go (((a, b, c), (x0, l0)) :< q)
+      | c == 1 = Just b
+      | otherwise = go (q <> Q.fromList [(hue l x, (x, l)) | let l = filter (inRange x0) l0, x <- split x0])
+
+hue l x0 = (negate $ length $ filter (inRange x0) l, dist x0 (0, 0, 0), size x0)
+
+day23 :: IO (String, String)
 day23 = do
-  input <- map (fromJust . parseMaybe parseBot) . lines <$> (getDataDir >>= readFile . (++ "/input/input23.txt"))
-  -- input <- map (fromJust . parseMaybe parseBot) . lines <$> readFile "input/test23.txt"
-  let maxR = maximum $ map (manhattan (0, 0, 0) . fst) input
-      input' = map convertBot input
-      searchArea = convertBot ((0, 0, 0), maxR)
-  print $ length $ filter (inRange' (maximumBy (compare `on` snd) input)) input
-  -- print $ fst $ fromJust $ IM.maxView $ IM.filter (not . null) $ overlapBot $ zip [0..] $ map convertBot input
-  print $ manhattan (0, 0, 0) $ maximum $ dijkstra input' 0 IM.empty (P.singleton 1000 searchArea)
+  input <- mapMaybe (parseMaybe botParser) . lines <$> (getDataDir >>= readFile . (++ "/input/input23.txt"))
+  let
+    !finalAnsa =
+      show $
+        day23a input
+  let
+    !finalAnsb =
+      show $
+        day23b input
+  pure (finalAnsa, finalAnsb)

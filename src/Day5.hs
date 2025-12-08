@@ -1,7 +1,8 @@
 module Day5 where
 
-import Paths_AOC2018
+import Control.Parallel.Strategies
 import Data.Char
+import Paths_AOC2018
 
 deletePair :: String -> String
 deletePair = f []
@@ -15,8 +16,17 @@ deletePair = f []
 
 alphaList = [[x, toUpper x] | x <- ['a' .. 'z']]
 
-day5 :: IO ()
+day5 :: IO (String, String)
 day5 = do
   input <- filter isAlpha <$> (getDataDir >>= readFile . (++ "/input/input5.txt"))
-  print $ length $ deletePair input
-  print $ minimum $ map (\xs -> length $ deletePair $ filter (`notElem` xs) input) alphaList
+  let
+    !finalAnsa =
+      show
+        . length
+        $ deletePair input
+  let
+    !finalAnsb =
+      show
+        . minimum
+        $ parMap rpar (\xs -> length $ deletePair $ filter (`notElem` xs) input) alphaList
+  pure (finalAnsa, finalAnsb)

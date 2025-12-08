@@ -1,68 +1,74 @@
 module Day6 where
 
-import Paths_AOC2018
-import Data.Array.Unboxed (UArray)
-import qualified Data.Array.Unboxed as U
-import Data.List (findIndex, intersect, sort, tails)
+import Control.Parallel.Strategies
+import Data.Array.Unboxed qualified as U
+import Data.IntSet qualified as IS
+import Data.List (foldl', sort)
 import Data.List.Split (splitOn)
-import Data.Map (Map)
-import qualified Data.Map as Map
-import Data.Maybe (fromMaybe)
-import qualified Data.MultiSet as MS
-import Data.Set (Set)
-import qualified Data.Set as Set
-import MyLib (drawGraph)
-
-type M = Map Index (Set Index)
+import Debug.Trace (traceShow)
+import Paths_AOC2018
 
 type Index = (Int, Int)
 
 adjacent = [(0, 1), (0, -1), (-1, 0), (1, 0)]
 
-addIndex :: (Num a) => (a, a) -> (a, a) -> (a, a)
-addIndex (a, b) (c, d) = (a + c, b + d)
+parseInput = map ((\[x, y] -> (x, y)) . map (read @Int) . splitOn ", ") . lines
 
-step :: M -> M
-step m = ms
-  where
-    ms =
-      Map.union m
-        . Map.unionsWith (<>)
-        $ map (\x -> Map.mapKeysMonotonic (addIndex x) m Map.\\ m) adjacent
-
-parseInput = Map.fromList . map ((\[x, y] -> ((x, y), Set.singleton (x, y))) . map (read @Int) . splitOn ", ") . lines
-
-toDir :: Int -> Int -> [Int] -> UArray Int Int
-toDir limit midX xs = U.array (0, limit) [(i, length (takeWhile (< i) upperX) + length (takeWhile (< i) lowerX)) | i <- [0 .. limit]]
-  where
-    -- midX = xs !! (length xs `div` 2)
-    upperX = takeWhile (< limit) [sum (map (abs . subtract x) xs) | x <- [midX ..]]
-    lowerX = takeWhile (< limit) [sum (map (abs . subtract x) xs) | x <- [midX - 1, midX - 2 ..]]
-
--- calc :: [Index] -> Int -> Int
-calc i limit = sum $ map snd ys
+-- day6b i limit = (minY, maxY)
+day6b i limit = sum ys
   where
     allX = sort $ map fst i
     allY = sort $ map snd i
     midX = allX !! (length allX `div` 2)
     midY = allY !! (length allY `div` 2)
-    xArray = toDir limit midX allX
-    yArray = toDir limit midY allY
-    upperX = takeWhile ((limit >) . snd) [(x, sum (map (abs . subtract x) allX)) | x <- [midX ..]]
-    lowerX = takeWhile ((< limit) . snd) [(x, sum (map (abs . subtract x) allX)) | x <- [midX - 1, midX - 2 ..]]
-    xs = reverse lowerX <> upperX
-    ys = [(x, yArray U.! (limit - snd x)) | x <- xs]
+    yArray x = length (takeWhile (< x) upperY) + length (takeWhile (< x) lowerY)
+    upper all mid = takeWhile (< limit) [sum (map (abs . subtract m) all) | m <- [mid ..]]
+    lower all mid = takeWhile (< limit) [sum (map (abs . subtract m) all) | m <- [mid - 1, mid - 2 ..]]
+    upperY = upper allY midY
+    lowerY = lower allY midY
+    upperX = upper allX midX
+    lowerX = lower allX midX
+    xs = lowerX <> upperX
+    ys = map (yArray . (limit -)) xs
 
-day6 :: IO ()
+day6a l = maximum ans
+  where
+    lSorted = sort l
+    ilSorted = zip [1 ..] lSorted
+    maxY = maximum $ map snd l
+    minY = minimum $ map snd l
+    ans = U.accumArray @U.Array (+) 0 (1, length l) (concatMap (g . reverse) ys)
+    g ((i0, (m0, x0)) : a1@(i1, (m1, x1)) : a2@(i2, (m2, x2)) : cs)
+      | i1 `IS.member` infinite = g (a1 : a2 : cs)
+      | otherwise = (i1, r + l + 1) : g (a1 : a2 : cs)
+      where
+        l = (x1 - m1 - x0 + m0 - 1) `div` 2
+        r = (x2 + m2 - x1 - m1 - 1) `div` 2
+    g _ = []
+    infinite = IS.fromList $ map fst $ head ys <> last ys <> map head ys <> map last ys
+    ys = map (\y -> f y [] ilSorted) [minY .. maxY]
+    f row cs [] = cs
+    f row [] ((i1, (x, y)) : xs) = f row [(i1, (abs (row - y), x))] xs
+    f row cs'@((i0, (m0, x0)) : cs) xs'@((i1, (x1, y1)) : xs)
+      | d < -w = f row cs xs'
+      | d == -w = f row ((i1, (m1, x1)) : (0, (m0, x0)) : cs) xs
+      | d == w = f row ((0, (m1, x1)) : (i0, (m0, x0)) : cs) xs
+      | d > w = f row cs' xs
+      | otherwise = f row ((i1, (m1, x1)) : (i0, (m0, x0)) : cs) xs
+      where
+        m1 = abs (row - y1)
+        d = m1 - m0
+        w = x1 - x0
+
+day6 :: IO (String, String)
 day6 = do
   input <- parseInput <$> (getDataDir >>= readFile . (++ "/input/input6.txt"))
-  -- input <- parseInput <$> readFile "input/test6.txt"
-  let f = Map.fromList $ zip (Map.keys input) (['a' .. 'z'] ++ ['A' .. 'Z'])
-      xs = iterate step input
-      g (x : y : xs) = (length (Map.filter ((> 1) . Set.size) y) - length (Map.filter ((> 1) . Set.size) x)) : g (y : xs)
-      Just n = findIndex (\xs -> all (== head xs) $ take 10 xs) $ tails $ g xs
-      h = MS.toOccurList . MS.fromList . map Set.findMin . filter ((== 1) . length) . Map.elems
-      day6a = maximum $ map snd $ h (xs !! (n + 2)) `intersect` h (xs !! (n + 3))
-      i = Map.keys input
-  print day6a
-  print $ calc i 10000
+  let
+    !finalAnsa =
+      show $
+        day6a input
+  let
+    !finalAnsb =
+      show $
+        day6b input 10000
+  pure (finalAnsa, finalAnsb)

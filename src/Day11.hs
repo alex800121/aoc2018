@@ -1,69 +1,78 @@
 module Day11 where
 
-import Paths_AOC2018
-import Data.Array
+import Control.Monad.ST.Strict (ST)
 import Data.Bifunctor (Bifunctor (..))
 import Data.Function (on)
 import Data.List (maximumBy)
 import Data.Maybe (fromMaybe)
-import Debug.Trace
-import qualified Data.Array.IArray as I
+import Data.Vector.Unboxed (Vector)
+import Data.Vector.Unboxed qualified as V
+import Data.Vector.Unboxed.Mutable (STVector)
+import Data.Vector.Unboxed.Mutable qualified as MV
+import Paths_AOC2018
 
-input = 9995
-
-type PowerGrid = Array Index Int
+type PowerGrid = Vector Int
 
 type Index = (Int, Int)
 
+len = 300
+fromIndex (x, y) = x * succ len + y
+toIndex = (`divMod` succ len)
+
 initArray :: Int -> PowerGrid
 initArray sn =
-  array
-    b
-    [ ((x, y), p)
-      | (x, y) <- range b,
-        let rackID = x + 10,
-        let p = (((((rackID * y) + sn) * rackID) `div` 100) `mod` 10) - 5
-    ]
+  V.generate
+    (succ len * succ len)
+    f
   where
-    b = ((1, 1), (300, 300))
+    f i
+      | x == 0 || y == 0 = 0
+      | otherwise = ((((rackID * y) + sn) * rackID) `div` 100) `mod` 10 - 5
+      where
+        (x, y) = toIndex i
+        rackID = x + 10
+
+accumGridST :: STVector s Int -> ST s ()
+accumGridST v =
+  mapM_
+    ( \i ->
+        let (x, y) = toIndex i
+         in if x == 0 || y == 0
+              then pure ()
+              else do
+                xs <- mapM (MV.read v . fromIndex) [(x - 1, y), (x, y - 1), (x, y), (x - 1, y - 1)]
+                let a : b : c : d : _ = xs
+                MV.write v i (a + b + c - d)
+    )
+    [0 .. succ len * succ len]
 
 accumGrid :: PowerGrid -> PowerGrid
-accumGrid g = g'
-  where
-    b = bounds g
-    g' =
-      array
-        b
-        [ ((x, y), p x y)
-          | (x, y) <- range b
-        ]
-    p x y = f g' (x - 1, y) + f g' (x, y - 1) + f g (x, y) - f g' (x - 1, y - 1)
-      where
-        f a i = fromMaybe 0 (a !? i)
+accumGrid = V.modify accumGridST
 
 calcPower :: PowerGrid -> Index -> Index -> Int
 calcPower g i j@(xb, yb) = f j + f i' - f (xa, yb) - f (xb, ya)
   where
     i'@(xa, ya) = bimap (subtract 1) (subtract 1) i
-    f i = fromMaybe 0 (g !? i)
+    f i = g V.! fromIndex i
 
-(!?) :: (Ix i, I.IArray a e) => a i e -> i -> Maybe e
-a !? i
-  | inRange (I.bounds a) i = Just (a I.! i)
-  | otherwise = Nothing
-
-day11 :: IO ()
+day11 :: IO (String, String)
 day11 = do
+  input <- read <$> (getDataDir >>= readFile . (++ "/input/input11.txt"))
   let g = accumGrid $ initArray input
-  print $ maximumBy (compare `on` snd) $ [((x, y), calcPower g (x, y) (x + 2, y + 2)) | x <- [1 .. 298], y <- [1 .. 298]]
-  print
-    . maximumBy (compare `on` snd)
-    $ [ ((x, y, size), calcPower g (x, y) (x', y'))
-        | x <- [1 .. 300],
-          y <- [1 .. 300],
-          size <- [1 .. 300],
-          let x' = x + size - 1,
-          let y' = y + size - 1,
-          x' <= 300,
-          y' <= 300
-      ]
+  let
+    !finalAnsa =
+      show
+        . maximumBy (compare `on` snd)
+        $ [((x, y), calcPower g (x, y) (x + 2, y + 2)) | x <- [1 .. len - 2], y <- [1 .. len - 2]]
+  let
+    !finalAnsb =
+      show
+        . maximumBy (compare `on` snd)
+        $ [ ((x, y, size), calcPower g (x, y) (x', y'))
+          | size <- [1 .. len]
+          , x <- [1 .. len - size + 1]
+          , let x' = x + size - 1
+          , y <- [1 .. len - size + 1]
+          , let y' = y + size - 1
+          ]
+  pure (finalAnsa, finalAnsb)

@@ -1,15 +1,15 @@
 module Day4 where
 
-import Paths_AOC2018
-import Data.List (sort, maximumBy, group)
+import Data.Bifunctor (Bifunctor (..))
+import Data.Function (on)
+import Data.List (group, maximumBy, sort)
 import Data.Map.Strict (Map)
-import qualified Data.Map.Strict as Map
+import Data.Map.Strict qualified as Map
+import Data.Maybe (mapMaybe)
 import MyLib
+import Paths_AOC2018
 import Text.Megaparsec
 import Text.Megaparsec.Char
-import Data.Maybe (mapMaybe)
-import Data.Function (on)
-import Data.Bifunctor (Bifunctor(..))
 
 data Hint = Guard Int | Sleep | Wake deriving (Show, Ord, Eq)
 
@@ -34,10 +34,24 @@ type Sleep = [Cycle]
 
 type Cycle = (Int, Int)
 
-day4 :: IO ()
+day4 :: IO (String, String)
 day4 = do
   input' <- sort . lines <$> (getDataDir >>= readFile . (++ "/input/input4.txt"))
   let input = buildTimeTable $ mapMaybe (parseMaybe parseHint) input'
   -- putStrLn $ unlines input'
-  print $ uncurry (*) $ second (head . maximumBy (compare `on` length) . group . sort . concatMap (\(x, y) -> [x .. y - 1])) $ maximumBy (compare `on` (sum . map (uncurry subtract) . snd)) $ Map.toList input
-  print $ uncurry (*) $ second head $ maximumBy (compare `on` length . snd) $ map (second (maximumBy (compare `on` length) . group . sort . concatMap (\(x, y) -> [x .. y - 1]))) $ Map.toList input
+  let
+    !finalAnsa =
+      show
+        . uncurry (*)
+        . second (head . maximumBy (compare `on` length) . group . sort . concatMap (\(x, y) -> [x .. y - 1]))
+        . maximumBy (compare `on` (sum . map (uncurry subtract) . snd))
+        $ Map.toList input
+  let
+    !finalAnsb =
+      show
+        . uncurry (*)
+        . second head
+        . maximumBy (compare `on` length . snd)
+        . map (second (maximumBy (compare `on` length) . group . sort . concatMap (\(x, y) -> [x .. y - 1])))
+        $ Map.toList input
+  pure (finalAnsa, finalAnsb)

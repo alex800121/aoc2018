@@ -1,10 +1,12 @@
 module Day3 where
 
-import Paths_AOC2018
+import Data.IntSet (IntSet)
+import Data.IntSet qualified as IS
 import Data.Maybe (fromJust, mapMaybe)
 import Data.Set (Set)
-import qualified Data.Set as Set
+import Data.Set qualified as Set
 import MyLib
+import Paths_AOC2018
 import Text.Megaparsec
 import Text.Megaparsec.Char
 
@@ -32,22 +34,28 @@ type S2 = S (S Z)
 calcOverlap :: [(Int, Fabric)] -> (Int, [Fabric])
 calcOverlap = f Nothing [] []
   where
-    f n rest acc [] = (fromJust n, acc)
-    f n rest acc (x : xs) = f n' (x : rest) (xs' <> acc) xs
+    f !n rest !acc [] = (fromJust n, acc)
+    f !n rest !acc (x : xs) = f n' (x : rest) (xs' <> acc) xs
       where
         n' = n `max` if null xs' && null rest' then Just (fst x) else Nothing
         xs' = mapMaybe (overlapEucVec (snd x) . snd) xs
         rest' = mapMaybe (overlapEucVec (snd x) . snd) rest
 
-calcArea :: Fabric -> Int
-calcArea (Cons (a, b) (Cons (c, d) Nil)) = (b - a) * (d - c)
+calcArea' :: Fabric -> IntSet
+calcArea' (Cons (a, b) (Cons (c, d) Nil)) = IS.fromList [x + 1000 * y | x <- [a .. b - 1], y <- [c .. d - 1]]
 
-calcArea' :: Fabric -> Set Range
-calcArea' (Cons (a, b) (Cons (c, d) Nil)) = Set.fromList [(x, y) | x <- [a .. b - 1], y <- [c .. d - 1]]
-
-day3 :: IO ()
+day3 :: IO (String, String)
 day3 = do
   input <- map (fromJust . parseMaybe inputParser) . lines <$> (getDataDir >>= readFile . (++ "/input/input3.txt"))
   let (a, b) = calcOverlap input
-  print $ length $ Set.unions $ map calcArea' b
-  print a
+  let
+    !finalAnsa =
+      show
+        . IS.size
+        . IS.unions
+        $ map calcArea' b
+  let
+    !finalAnsb =
+      show $
+        a
+  pure (finalAnsa, finalAnsb)

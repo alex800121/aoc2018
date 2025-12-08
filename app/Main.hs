@@ -1,56 +1,57 @@
-module Main where
+module Main (main, solveAll) where
 
-import Day1
-import Day10
-import Day11
-import Day12
-import Day13
-import Day14
-import Day15
-import Day16
-import Day17
-import Day18
-import Day19
-import Day2
-import Day20
-import Day21
-import Day22
-import Day23
-import Day24
-import Day25
-import Day3
-import Day4
-import Day5
-import Day6
-import Day7
-import Day8
-import Day9
--- import MyLib
+import Solve
 
-main :: IO ()
-main = do
-  day1
-  day2
-  day3
-  day4
-  day5
-  day6
-  day7
-  day8
-  day9
-  day10
-  day11
-  day12
-  day13
-  day14
-  day15
-  day16
-  day17
-  day18
-  day19
-  day20
-  day21
-  day22
-  day23
-  day24
-  day25
+-- import Day1
+-- import Day2
+-- import Day3
+-- import Day4
+-- import Day5
+-- import Day6
+-- import Day7
+-- import Day8
+-- import Day9
+-- import Day10
+-- import Day11
+-- import Day12
+-- import Day13
+-- import Day14
+-- import Day15
+-- import Day16
+-- import Day17
+-- import Day18
+-- import Day19
+-- import Day20
+-- import Day21
+-- import Day22
+-- import Day23
+-- import Day24
+-- import Day25
+--
+-- main = do
+--   day1 >>= \(a, b) -> putStrLn "day1" >> putStrLn a >> putStrLn b
+--   day2 >>= \(a, b) -> putStrLn "day2" >> putStrLn a >> putStrLn b
+--   day3 >>= \(a, b) -> putStrLn "day3" >> putStrLn a >> putStrLn b
+--   day4 >>= \(a, b) -> putStrLn "day4" >> putStrLn a >> putStrLn b
+--   day5 >>= \(a, b) -> putStrLn "day5" >> putStrLn a >> putStrLn b
+--   day6 >>= \(a, b) -> putStrLn "day6" >> putStrLn a >> putStrLn b
+--   day7 >>= \(a, b) -> putStrLn "day7" >> putStrLn a >> putStrLn b
+--   day8 >>= \(a, b) -> putStrLn "day8" >> putStrLn a >> putStrLn b
+--   day9 >>= \(a, b) -> putStrLn "day9" >> putStrLn a >> putStrLn b
+--   day10 >>= \(a, b) -> putStrLn "day10" >> putStrLn a >> putStrLn b
+--   day11 >>= \(a, b) -> putStrLn "day11" >> putStrLn a >> putStrLn b
+--   day12 >>= \(a, b) -> putStrLn "day12" >> putStrLn a >> putStrLn b
+--   day13 >>= \(a, b) -> putStrLn "day13" >> putStrLn a >> putStrLn b
+--   day14 >>= \(a, b) -> putStrLn "day14" >> putStrLn a >> putStrLn b
+--   day15 >>= \(a, b) -> putStrLn "day15" >> putStrLn a >> putStrLn b
+--   day16 >>= \(a, b) -> putStrLn "day16" >> putStrLn a >> putStrLn b
+--   day17 >>= \(a, b) -> putStrLn "day17" >> putStrLn a >> putStrLn b
+--   day18 >>= \(a, b) -> putStrLn "day18" >> putStrLn a >> putStrLn b
+--   day19 >>= \(a, b) -> putStrLn "day19" >> putStrLn a >> putStrLn b
+--   day20 >>= \(a, b) -> putStrLn "day20" >> putStrLn a >> putStrLn b
+--   day21 >>= \(a, b) -> putStrLn "day21" >> putStrLn a >> putStrLn b
+--   day22 >>= \(a, b) -> putStrLn "day22" >> putStrLn a >> putStrLn b
+--   day23 >>= \(a, b) -> putStrLn "day23" >> putStrLn a >> putStrLn b
+--   day24 >>= \(a, b) -> putStrLn "day24" >> putStrLn a >> putStrLn b
+--   day25 >>= \(a, b) -> putStrLn "day25" >> putStrLn a >> putStrLn b
+main = solveAll

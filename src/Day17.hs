@@ -1,20 +1,19 @@
 module Day17 where
 
-import Paths_AOC2018
 import Data.Bifoldable (Bifoldable (..))
 import Data.Bifunctor (Bifunctor (..))
 import Data.Either (partitionEithers)
 import Data.IntMap (IntMap)
-import qualified Data.IntMap as IM
+import Data.IntMap qualified as IM
 import Data.IntSet (IntSet)
-import qualified Data.IntSet as IS
-import qualified Data.Map.Strict as Map
+import Data.IntSet qualified as IS
+import Data.Map.Strict qualified as Map
 import Data.Maybe (fromMaybe, mapMaybe)
-import Day15 (RIndex, RTuple (..))
+import Debug.Trace
 import MyLib
+import Paths_AOC2018
 import Text.Megaparsec
 import Text.Megaparsec.Char
-import Debug.Trace
 
 data WaterType = Down | Side | Stasis deriving (Show, Eq, Enum, Ord, Bounded)
 
@@ -33,7 +32,7 @@ showWater m w = unlines $ drawGraph (fromMaybe ' ') $ Map.union m' w'
 
 fillByLayer :: Int -> M -> Int -> Water -> Water
 fillByLayer limit m n w
-  -- | trace (showWater m w) False = undefined
+  -- \| trace (showWater m w) False = undefined
   | n >= limit = w
   | IM.null stasis = fillByLayer limit m (n + 1) w'
   | otherwise = fillByLayer limit m (n - 1) w'
@@ -88,13 +87,13 @@ parseInput = do
       [ uncurry
           IM.singleton
           (second IS.singleton $ a (const iA) $ b (const iBs) (0, 0))
-        | iBs <- [minimum iB .. maximum iB]
+      | iBs <- [minimum iB .. maximum iB]
       ]
 
 initWater :: Water
 initWater = IM.singleton 0 (IM.singleton 500 Down)
 
-day17 :: IO ()
+day17 :: IO (String, String)
 day17 = do
   input' <- IM.unionsWith IS.union . mapMaybe (parseMaybe parseInput) . lines <$> (getDataDir >>= readFile . (++ "/input/input17.txt"))
   -- input' <- IM.unionsWith IS.union . mapMaybe (parseMaybe parseInput) . lines <$> readFile "input/test17.txt"
@@ -103,5 +102,16 @@ day17 = do
       m = showWater input' ans
   -- writeFile "output" m
   -- print $ length $ filter (`elem` "|.~") m
-  print $ sum $ IM.map length $ IM.filterWithKey (\k _ -> k >= minY && k <= maxY) ans
-  print $ sum $ IM.map (length . IM.filter (== Stasis)) $ IM.filterWithKey (\k a -> k >= minY && k <= maxY) ans
+  let
+    !finalAnsa =
+      show
+        . sum
+        . IM.map length
+        $ IM.filterWithKey (\k _ -> k >= minY && k <= maxY) ans
+  let
+    !finalAnsb =
+      show
+        . sum
+        . IM.map (length . IM.filter (== Stasis))
+        $ IM.filterWithKey (\k a -> k >= minY && k <= maxY) ans
+  pure (finalAnsa, finalAnsb)

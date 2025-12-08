@@ -1,29 +1,29 @@
 module Day16 where
 
-import Paths_AOC2018
 import Data.Bits (Bits (..))
-import Data.Vector (Vector, (!), (//))
-import qualified Data.Vector as V
-import MyLib
-import Text.Megaparsec.Char
-import Text.Megaparsec
-import Data.List.Split (splitOn)
 import Data.IntMap (IntMap)
-import qualified Data.IntMap as IM
-import Data.List (intersect, (\\), foldl')
+import Data.IntMap qualified as IM
+import Data.List (foldl', intersect, (\\))
+import Data.List.Split (splitOn)
+import Data.Vector (Vector, (!), (//))
+import Data.Vector qualified as V
 import Debug.Trace
+import MyLib
+import Paths_AOC2018
+import Text.Megaparsec
+import Text.Megaparsec.Char
 
 data Test = Test
-  { _before :: Vector Int,
-    _instruction :: (Int, Vector Int),
-    _after :: Vector Int
+  { _before :: Vector Int
+  , _instruction :: (Int, Vector Int)
+  , _after :: Vector Int
   }
   deriving (Show, Eq, Ord)
 
-{- 
+{-
 Before: [0, 1, 2, 0]
 3 1 0 0
-After:  [1, 1, 2, 0] 
+After:  [1, 1, 2, 0]
 -}
 testParser :: Parser Test
 testParser = do
@@ -101,12 +101,22 @@ reduce = V.fromList . map snd . f IM.empty
         b' = IM.map (\\ e) b
         acc' = IM.union acc a'
 
-day16 :: IO ()
+day16 :: IO (String, String)
 day16 = do
   [a, b] <- splitOn "\n\n\n" <$> (getDataDir >>= readFile . (++ "/input/input16.txt"))
   let Just tests = parseMaybe (testParser `sepBy` (newline >> newline)) a
       ins = map ((,) <$> fst . _instruction <*> validOpCode) tests
       opcodeVec = reduce $ IM.unionsWith intersect $ map (uncurry IM.singleton) ins
       input = map (((,) <$> head <*> V.fromList . tail) . map (read @Int) . words) $ tail $ lines b
-  print $ length $ filter ((>= 3) . length . snd) ins
-  print $ (! 0) $ foldl' (\acc f -> f acc) (V.fromList [0,0,0,0]) $ map (interpretWith opcodeVec) input
+  let
+    !finalAnsa =
+      show
+        . length
+        $ filter ((>= 3) . length . snd) ins
+  let
+    !finalAnsb =
+      show
+        . (! 0)
+        . foldl' (\acc f -> f acc) (V.fromList [0, 0, 0, 0])
+        $ map (interpretWith opcodeVec) input
+  pure (finalAnsa, finalAnsb)

@@ -2,26 +2,26 @@
 
 module Day13 where
 
-import Paths_AOC2018
 import Control.Monad (foldM)
 import Data.Array.Unboxed
 import Data.Bifunctor (Bifunctor (..))
 import Data.Either (fromRight)
 import Data.Function (on)
-import Data.List (foldl', insertBy, deleteBy)
+import Data.List (deleteBy, foldl', insertBy)
 import Data.Set (Set)
-import qualified Data.Set as Set
+import Data.Set qualified as Set
 import Data.Tuple (swap)
 import MyLib
+import Paths_AOC2018
 
 type Index = (Int, Int)
 
 type M = UArray Index Char
 
 data Cart = C
-  { _index :: Index,
-    _direction :: Direction,
-    _turn :: Turn
+  { _index :: Index
+  , _direction :: Direction
+  , _turn :: Turn
   }
   deriving (Show, Ord, Eq)
 
@@ -41,7 +41,7 @@ turn L = pred
 turn R = succ
 turn F = id
 
-tick :: M -> [Cart] -> ([Index],  [Cart])
+tick :: M -> [Cart] -> ([Index], [Cart])
 tick m c = f ([], []) c
   where
     f acc [] = acc
@@ -91,10 +91,20 @@ readInput a = (c, a')
 
 compareSwap = compare `on` swap . _index
 
-day13 :: IO ()
+day13 :: IO (String, String)
 day13 = do
   (cart, m) <- readInput . drawArray @UArray . lines <$> (getDataDir >>= readFile . (++ "/input/input13.txt"))
   -- (cart, m) <- readInput . drawArray @UArray . lines <$> readFile "input/test13.txt"
   let ans = run m cart
-  print $ last $ fst ans
-  print $ _index $ head $ snd ans
+  let
+    !finalAnsa =
+      show
+        . last
+        $ fst ans
+  let
+    !finalAnsb =
+      show
+        . _index
+        . head
+        $ snd ans
+  pure (finalAnsa, finalAnsb)

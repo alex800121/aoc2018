@@ -1,193 +1,203 @@
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE TemplateHaskell #-}
-{-# LANGUAGE TupleSections #-}
+{-# LANGUAGE MultiWayIf #-}
+{-# LANGUAGE OverloadedLabels #-}
+{-# LANGUAGE PatternSynonyms #-}
 
 module Day15 where
 
-import Paths_AOC2018
-import Control.Lens (over, set, view)
-import Control.Lens.At (Ixed (..))
-import Control.Lens.Indexed
-import Control.Lens.TH
-import Data.Array
+import Control.Applicative (Alternative (..))
+import Control.Monad (foldM_)
+import Control.Monad.ST.Strict (ST, runST)
 import Data.Bifunctor (Bifunctor (..))
-import Data.Coerce
-import Data.Foldable (minimumBy)
-import Data.Function (on)
-import Data.List (find, findIndex)
-import qualified Data.Map.Strict as Map
-import Data.Maybe (fromJust, mapMaybe)
-import Data.Set (Set)
-import qualified Data.Set as Set
-import Data.Tuple (swap)
-import MyLib (drawArray, drawGraph)
-import Prelude hiding (round)
+import Data.Bits (Bits (..), FiniteBits (..))
+import Data.Char (intToDigit)
+import Data.DoubleWord (BinaryWord (leadingZeroes, trailingZeroes))
+import Data.Either (isLeft)
+import Data.Foldable (traverse_)
+import Data.Function (fix, on)
+import Data.List (foldl', sort, unfoldr)
+import Data.Map.Strict (Map)
+import Data.Map.Strict qualified as Map
+import Data.Maybe (fromMaybe, isJust, isNothing)
+import Data.Vector.Storable qualified as SV
+import Data.Vector.Storable.Mutable qualified as MSV
+import Data.Vector.Strict qualified as V
+import Data.Word (Word32)
+import GHC.Generics (Generic)
+import MyLib (drawMap)
+import Numeric (showIntAtBase)
+import Optics
+import Paths_AOC2018
+
+type Side = Bool
+
+pattern Goblin = False
+
+pattern Elf = True
+
+adjacent = [P 0 (-1), P (-1) 0, P 1 0, P 0 1]
+
+P a b +& P c d = P (a + c) (b + d)
 
 data Unit = Unit
-  { _moved :: Bool,
-    _pos :: RIndex,
-    _hp :: Int,
-    _ap :: Int,
-    _species :: Species
+  { hp :: Int
+  , ap :: Int
+  , side :: Side
   }
-  deriving (Show, Ord, Eq)
+  deriving (Show, Eq, Generic, Ord)
 
-data Species = Elf | Goblin deriving (Eq, Ord)
+data Point = P {x :: Int, y :: Int} deriving (Show, Eq, Generic)
 
-instance Show Species where
-  show Elf = "E"
-  show Goblin = "G"
+instance Ord Point where
+  compare a b = on compare y a b <> on compare x a b
 
-instance Enum Species where
-  toEnum n = case n `mod` 2 of
-    0 -> Elf
-    1 -> Goblin
-  fromEnum Elf = 0
-  fromEnum Goblin = 1
-
-data GameState = G
-  { _units :: Set Unit,
-    _gameMap :: Array RIndex Space,
-    _egNum :: Array Int Int,
-    _roundN :: Int
-  }
-  deriving (Eq, Ord)
-
-showGameState :: GameState -> String
-showGameState (G u g _ i) = unlines (drawGraph f g'') ++ u' ++ "\nRound: " ++ show i
+readInput = second (second (SV.fromList @Word32 . ($ []))) . foldl' f (Map.empty, ((0, 0), id)) . zip [0 ..]
   where
-    uPos = Map.fromList $ Set.toList $ Set.map ((,) <$> fromIndex . _pos <*> show . _species) u
-    g' = Map.fromList . map (bimap fromIndex show) $ assocs g
-    g'' = Map.union uPos g'
-    f Nothing = ' '
-    f (Just x) = head x
-    u' = unlines $ map show $ Set.toList u
+    f (m, ((e, g), v)) (i, xs) = second (second (\x -> v . (x :))) $ foldl' (f1 i) (m, ((e, g), 0)) (zip [0 ..] xs)
+    f1 i (m, ((e, g), n)) (j, x) = case x of
+      '#' -> (m, ((e, g), n `setBit` j))
+      'E' -> (Map.insert (P j i) (Unit 200 3 Elf) m, ((e + 1, g), n))
+      'G' -> (Map.insert (P j i) (Unit 200 3 Goblin) m, ((e, g + 1), n))
+      _ -> (m, ((e, g), n))
 
-instance Show GameState where
-  show = showGameState
-
-newtype RTuple a b = R {fromIndex :: (a, b)} deriving (Eq, Ix, Functor, Bifunctor)
-
-type RIndex = RTuple Int Int
-
-type Index = (Int, Int)
-
-instance (Show a, Show b) => Show (RTuple a b) where
-  show = show . fromIndex
-
-instance (Ord a, Ord b) => Ord (RTuple a b) where
-  compare = compare `on` swap . fromIndex
-
-data Space
-  = Wall
-  | Space
-  deriving (Eq, Ord)
-
-instance Show Space where
-  show Wall = "#"
-  show Space = "."
-
-makeLenses ''Unit
-makeLenses ''GameState
-
-adjacent = [(0, 1), (0, -1), (1, 0), (-1, 0)]
-
-readInput :: Int -> Int -> Int -> Array Index Char -> GameState
-readInput hp gobAp elfAp input = G units s (listArray (0, 1) [elves, goblins]) 0
+intersect a b = f 0
   where
-    unit x i = let ap = if x == Elf then elfAp else gobAp in Unit False i hp ap x
-    b = bimap R R (bounds input)
-    l = map (first R) $ assocs input
-    f = Set.fromList . map (\x -> unit (if snd x == 'E' then Elf else Goblin) (fst x))
-    units = f $ filter ((`elem` "EG") . snd) l
-    s = array b (map (second (\case '#' -> Wall; _ -> Space)) l)
-    elves = length (Set.filter ((== Elf) . _species) units)
-    goblins = length (Set.filter ((== Goblin) . _species) units)
+    f x =
+      liftA2 (,) <$> MSV.readMaybe a x <*> MSV.readMaybe b x >>= \case
+        Nothing -> pure Nothing
+        Just (n0, n1) | n <- n0 .&. n1, n /= 0 -> pure $ Just (trailingZeroes n, x)
+        _ -> f (x + 1)
 
-round :: GameState -> GameState
-round g
-  | _moved u = over roundN (+ 1) $ over units (Set.map (set moved False)) g
-  | 0 `elem` _egNum g' = (if _moved u' then over roundN (+ 1) else id) g'
-  | otherwise = round g'
+expand wall v = snd <$> MSV.ifoldM' f (0, False) v
   where
-    us = _units g
-    (u, us') = Set.deleteFindMin us
-    g' = turn (set units us' g) u
-    u' = Set.findMin $ _units g'
+    f (prev, acc) i curr = do
+      next <- fromMaybe 0 <$> MSV.readMaybe v (i + 1)
+      w <- MSV.read wall i
+      let curr' = (prev .|. (curr `shiftR` 1) .|. curr .|. (curr `shiftL` 1) .|. next) .&. complement w
+          acc' = acc || (curr /= curr')
+      MSV.write v i curr'
+      pure (curr, acc')
 
-turn :: GameState -> Unit -> GameState
-turn g u = g'
+play b w0 r0 i0 v0 (m0, e0, g0)
+  | e0 == 0 || g0 == 0 = Just $ r0 * sum (Map.map hp mFiltered)
+  | i0 >= length v0 = play b w0 (r0 + 1) 0 vFiltered (mFiltered, e0, g0)
+  | attHp <= 0 = play b w0 r0 (i0 + 1) v0 (m0, e0, g0)
+  | Just (m1, e1, g1) <- attack attP0 attAp attSide m0 e0 g0 =
+      if b && e1 /= e0 then Nothing else play b w0 r0 (i0 + 1) v0 (m1, e1, g1)
+  | (m1, e1, g1) <- fromMaybe (mMoved, e0, g0) (attack attP1 attAp attSide mMoved e0 g0) =
+      if b && e1 /= e0 then Nothing else play b w0 r0 (i0 + 1) vMoved (m1, e1, g1)
   where
-    u' = move g u
-    g' = attack g u'
+    mFiltered = Map.filter ((> 0) . hp) m0
+    vFiltered = V.fromList $ Map.keys mFiltered
+    attP0 = v0 V.! i0
+    u0@(Unit attHp attAp attSide) = m0 Map.! attP0
+    attP1 = fromMaybe attP0 $ bfs w0 m0 attP0 attSide
+    mMoved = Map.insert attP1 u0 $ Map.delete attP0 m0
+    vMoved = v0 V.// [(i0, attP1)]
 
-hasSpace g i = inRange b i && gm ! i /= Wall
+fromInt i = P (i `shiftR` 8) (i `mod` bit 8)
+
+toInt (P x y) = (x `shiftL` 8) + y
+
+overlap d p = MSV.ifoldM' (f p) Nothing d
   where
-    gm = _gameMap g
-    b = bounds gm
+    f p acc i x = do
+      y <- MSV.read p i
+      let n = trailingZeroes (x .&. y)
+      if n < finiteBitSize x
+        then pure (acc <|> Just (P n i))
+        else pure acc
 
-hasSpecies g sp i = any (\x -> _pos x == i && _species x == sp) $ _units g
+showM = unlines . map (reverse . showBin) . SV.toList @Word32
 
-hasOpponent g u = hasSpecies g (succ (_species u))
-
-hasTeam g u = hasSpecies g (_species u)
-
-move :: GameState -> Unit -> Unit
-move g u
-  | any (hasOpponent g u) start = set moved True u
-  | otherwise = set moved True $ set pos i' u
+bfs w0 m0 p0 s0 = runST $ do
+  w <- SV.thaw w0
+  p <- MSV.replicate (SV.length w0) (0 :: Word32)
+  MSV.modify p (`setBit` x p0) (y p0)
+  d <- MSV.replicate (SV.length w0) (0 :: Word32)
+  traverse_ (f w d) $ Map.toList m0
+  expand w d
+  t <- g w d p
+  case t of
+    Nothing -> pure Nothing
+    Just (P n i) -> do
+      p <- MSV.replicate (SV.length w0) (0 :: Word32)
+      MSV.modify p (`setBit` n) i
+      d <- MSV.replicate (SV.length w0) (0 :: Word32)
+      MSV.modify d (`setBit` x p0) (y p0)
+      expand w d
+      g w d p
   where
-    start =
-      Map.filterWithKey (\k _ -> hasSpace g k && not (hasTeam g u k)) $
-        Map.fromList [(x, x) | let i = _pos u, (a, b) <- adjacent, let x = bimap (+ a) (+ b) i]
-    i' = bfs start Set.empty
-    bfs next visited
-      | Map.null next = view pos u
-      | not (Map.null nextToU) = snd i'
-      | otherwise = bfs next'' visited'
+    g w d p = do
+      x <- overlap d p
+      if isNothing x
+        then do
+          b <- expand w p
+          if b then g w d p else pure Nothing
+        else pure x
+    f :: MSV.STVector s Word32 -> MSV.STVector s Word32 -> (Point, Unit) -> ST s ()
+    f w d (P x y, u)
+      | hp u > 0 && side u == s0 = MSV.modify w (`setBit` x) y
+      | hp u > 0 = MSV.modify d (`setBit` x) y
+      | otherwise = pure ()
+
+attack attP0 attAp attSide m0 e0 g0
+  | (defHp0, defP0, d0) : _ <-
+      sort
+        [ (hp d, p, d)
+        | i <- adjacent
+        , let p = attP0 +& i
+        , p `Map.member` m0
+        , let d = m0 Map.! p
+        , side d /= attSide
+        , hp d > 0
+        ]
+  , defHp1 <- defHp0 - attAp
+  , m1 <- Map.adjust (set #hp defHp1) defP0 m0
+  , (e1, g1) <-
+      if
+        | defHp1 > 0 -> (e0, g0)
+        | attSide -> (e0, g0 - 1)
+        | otherwise -> (e0 - 1, g0) =
+      Just (m1, e1, g1)
+  | otherwise = Nothing
+
+showBin x = showIntAtBase 2 (\case 0 -> '.'; 1 -> '#') x ""
+
+showState w m = unlines $ Map.foldlWithKey' f (map (reverse . showBin) (SV.toList w)) m
+  where
+    f v (P x y) u = over (ix y) (<> ('(' : show (hp u) <> ")")) $ set (ix y % ix x) n v
       where
-        (nextToU, next') =
-          Map.partitionWithKey
-            (\k _ -> hasOpponent g u k)
-            next
-        i' = Map.findMin nextToU
-        visited' = Set.union visited $ Map.keysSet next
-        next'' =
-          Map.filterWithKey (\k _ -> not (hasTeam g u k) && hasSpace g k && Set.notMember k visited')
-            . Map.unionsWith min
-            $ map (\(a, b) -> Map.mapKeys (bimap (+ a) (+ b)) next') adjacent
+        n = case side u of
+          Elf -> 'E'
+          Goblin -> 'G'
 
-attack :: GameState -> Unit -> GameState
-attack g u
-  | null ops = over units (Set.insert u) g
-  | hp' <= 0 = over (egNum . ix (fromEnum (_species op))) (subtract 1) $ over units (Set.insert u . Set.delete op) g
-  | otherwise = over units (Set.insert u . Set.insert op' . Set.delete op) g
+binSearch f m = go0 1 m
   where
-    i = map (\(a, b) -> bimap (+ a) (+ b) (_pos u)) adjacent
-    ops = Set.filter ((&&) <$> (`elem` i) . _pos <*> (/= _species u) . _species) $ _units g
-    op = minimumBy ((compare `on` _hp) <> (compare `on` _pos)) ops
-    op' = over hp (subtract (_ap u)) op
-    hp' = _hp op'
+    go0 n m
+      | f (n + m) = go1 m (n + m)
+      | otherwise = go0 (n * 2) m
+    go1 n m
+      | n == c = (n, m)
+      | f c = go1 n c
+      | otherwise = go1 c m
+      where
+        c = (n + m) `div` 2
 
-outcome = (*) <$> _roundN <*> sum . map _hp . Set.toList . _units
-day15 :: IO ()
+addAp x = Map.map (\y -> if side y then set #ap x y else y)
+
+day15 :: IO (String, String)
 day15 = do
-  input <- drawArray @Array . lines <$> (getDataDir >>= readFile . (++ "/input/input15.txt"))
-  -- input <- drawArray @Array . lines <$> readFile "input/test15.txt"
-  let g = readInput 200 3 3 input
-      elves = length $ Set.filter ((== Elf) . _species) $ _units g
-      gs = iterate round g
-      g' = find (elem 0 . _egNum) gs
-      altG =
-        find ((== elves) . (! 0) . _egNum . snd) $
-        mapMaybe
-          ( \x ->
-              let y = find (((||) <$> (< elves) . (! 0) <*> (== 0) . (! 1)) . _egNum)
-                      . iterate round
-                      $ readInput 200 3 x input
-               in (x,) <$> y
-          )
-          [4 ..]
-  print $ fmap outcome g'
-  print $ fmap (outcome . snd) altG
+  (m0, ((e0, g0), w0)) <- readInput . lines <$> (getDataDir >>= readFile . (++ "/input/input15.txt"))
+  let v0 = V.fromList $ Map.keys m0
+      (n, m) = binSearch (\x -> isJust (play True w0 0 0 v0 (addAp x m0, e0, g0))) 4
+  let
+    !finalAnsa =
+      show $
+        play False w0 0 0 v0 (m0, e0, g0)
+  let
+    !finalAnsb =
+      show $
+        play True w0 0 0 v0 (addAp m m0, e0, g0)
+  pure (finalAnsa, finalAnsb)

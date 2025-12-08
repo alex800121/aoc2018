@@ -2,17 +2,17 @@
 
 module Day20 where
 
-import Paths_AOC2018
 import Data.Bifunctor (Bifunctor (..))
 import Data.Char (isAlpha)
 import Data.Map.Strict (Map)
-import qualified Data.Map.Strict as Map
+import Data.Map.Strict qualified as Map
 import Data.Set (Set)
-import qualified Data.Set as Set
+import Data.Set qualified as Set
+import Debug.Trace
 import MyLib (Direction (..), Parser, toIndex)
+import Paths_AOC2018
 import Text.Megaparsec
 import Text.Megaparsec.Char
-import Debug.Trace
 
 type Index = (Int, Int)
 
@@ -58,8 +58,8 @@ buildMap = f (0, 0) Map.empty
 bfs :: Index -> Map Index (Set Index) -> Map Index Int
 bfs i m = f 0 (Set.singleton i) Map.empty
   where
-    f n start acc 
-      -- | traceShow n False = undefined
+    f n start acc
+      -- \| traceShow n False = undefined
       | Set.null start = acc
       | otherwise = f (n + 1) start' acc'
       where
@@ -68,11 +68,19 @@ bfs i m = f 0 (Set.singleton i) Map.empty
 
 adjacent = [(0, 1), (0, -1), (1, 0), (-1, 0)]
 
-day20 :: IO ()
+day20 :: IO (String, String)
 day20 = do
   input <- init <$> (getDataDir >>= readFile . (++ "/input/input20.txt"))
   -- input <- init <$> readFile "input/test20.txt"
   let Just t = fmap (fmap fromChar) <$> parseMaybe regex input
       ans = bfs (0, 0) $ buildMap t
-  print $ maximum ans
-  print $ length $ Map.filter (>= 1000) ans
+  let
+    !finalAnsa =
+      show $
+        maximum ans
+  let
+    !finalAnsb =
+      show
+        . length
+        $ Map.filter (>= 1000) ans
+  pure (finalAnsa, finalAnsb)
